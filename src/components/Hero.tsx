@@ -8,7 +8,7 @@ const Hero = () => {
     <section id="accueil" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-elegant">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23f6bb77" fill-opacity="0.1"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmNmJiNzciIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-40"></div>
       </div>
 
       {/* Content */}
@@ -16,14 +16,14 @@ const Hero = () => {
         <div className="max-w-4xl mx-auto">
           {/* Main Title */}
           <h1 className="text-5xl md:text-7xl font-playfair font-bold text-elegant-800 mb-4 animate-fade-up">
-            J'couds des vis,
+            J&apos;couds des vis,
             <br />
-            <span className="text-rose-600">J'répare des âmes</span>
+            <span className="text-rose-600">J&apos;répare des âmes</span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-elegant-700 mb-8 animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            Nouvelle Trace Féminine – À la couture de l'être et à l'ouvrage du monde
+            Nouvelle Trace Féminine – À la couture de l&apos;être et à l&apos;ouvrage du monde
           </p>
 
           {/* Description */}
@@ -34,7 +34,7 @@ const Hero = () => {
               de solutions concrètes pour une Afrique plus forte.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Ce site est le reflet de mon cheminement, de mes valeurs, de mes réalisations et de ma vision pour l'avenir.
+              Ce site est le reflet de mon cheminement, de mes valeurs, de mes réalisations et de ma vision pour l&apos;avenir.
             </p>
           </div>
 
