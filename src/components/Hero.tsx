@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowDown, Heart, Sparkles } from 'lucide-react';
+import { ArrowDown, Heart, Sparkles, Users, BookOpen, Scissors, Award } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -37,6 +37,13 @@ const Hero = () => {
             Nouvelle Trace Féminine – À la couture de l&apos;être et à l&apos;ouvrage du monde
           </p>
 
+          {/* Citation inspirante */}
+          <div className="max-w-3xl mx-auto mb-8 md:mb-10 animate-fade-up px-4" style={{ animationDelay: '0.3s' }}>
+            <blockquote className="text-lg md:text-xl font-playfair italic text-rose-700 border-l-4 border-rose-300 pl-6 py-4 bg-white/30 backdrop-blur-sm rounded-lg">
+              &quot;Chaque point de couture est une prière, chaque création est un acte de foi vers un monde meilleur.&quot;
+            </blockquote>
+          </div>
+
           {/* Description */}
           <div className="max-w-4xl mx-auto mb-8 md:mb-12 animate-fade-up px-4" style={{ animationDelay: '0.4s' }}>
             <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4 md:mb-6">
@@ -47,6 +54,41 @@ const Hero = () => {
             <p className="text-base md:text-lg text-gray-700 leading-relaxed">
               Ce site est le reflet de mon cheminement, de mes valeurs, de mes réalisations et de ma vision pour l&apos;avenir.
             </p>
+          </div>
+
+          {/* Statistiques/Chiffres clés */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12 animate-fade-up px-4" style={{ animationDelay: '0.5s' }}>
+            <div className="bg-white/40 backdrop-blur-sm rounded-lg p-4 md:p-6 text-center">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-elegant-100 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-3">
+                <Scissors className="w-5 h-5 md:w-6 md:h-6 text-elegant-600" />
+              </div>
+              <div className="text-2xl md:text-3xl font-bold text-elegant-800">15+</div>
+              <div className="text-xs md:text-sm text-gray-600">Années d&apos;expérience</div>
+            </div>
+            
+            <div className="bg-white/40 backdrop-blur-sm rounded-lg p-4 md:p-6 text-center">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-3">
+                <Users className="w-5 h-5 md:w-6 md:h-6 text-rose-600" />
+              </div>
+              <div className="text-2xl md:text-3xl font-bold text-elegant-800">500+</div>
+              <div className="text-xs md:text-sm text-gray-600">Vies impactées</div>
+            </div>
+            
+            <div className="bg-white/40 backdrop-blur-sm rounded-lg p-4 md:p-6 text-center">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-coral-100 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-3">
+                <BookOpen className="w-5 h-5 md:w-6 md:h-6 text-coral-600" />
+              </div>
+              <div className="text-2xl md:text-3xl font-bold text-elegant-800">3</div>
+              <div className="text-xs md:text-sm text-gray-600">Livres publiés</div>
+            </div>
+            
+            <div className="bg-white/40 backdrop-blur-sm rounded-lg p-4 md:p-6 text-center">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-elegant-100 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-3">
+                <Award className="w-5 h-5 md:w-6 md:h-6 text-elegant-600" />
+              </div>
+              <div className="text-2xl md:text-3xl font-bold text-elegant-800">10+</div>
+              <div className="text-xs md:text-sm text-gray-600">Projets réalisés</div>
+            </div>
           </div>
 
           {/* CTA Buttons */}
@@ -77,6 +119,14 @@ const Hero = () => {
               Me contacter
             </Button>
           </div>
+
+          {/* Message d'inspiration */}
+          <div className="mt-8 md:mt-12 animate-fade-up px-4" style={{ animationDelay: '0.7s' }}>
+            <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+              Rejoignez-moi dans cette aventure où tradition et modernité se rencontrent pour 
+              <span className="text-rose-600 font-semibold"> transformer les communautés africaines</span>.
+            </p>
+          </div>
         </div>
 
         {/* Scroll indicator */}
@@ -89,6 +139,8 @@ const Hero = () => {
       <div className="hidden md:block absolute top-20 left-10 w-16 h-16 lg:w-20 lg:h-20 bg-rose-200 rounded-full opacity-20 animate-float"></div>
       <div className="hidden md:block absolute top-40 right-20 w-12 h-12 lg:w-16 lg:h-16 bg-elegant-300 rounded-full opacity-30 animate-float" style={{ animationDelay: '1s' }}></div>
       <div className="hidden md:block absolute bottom-32 left-20 w-10 h-10 lg:w-12 lg:h-12 bg-coral-300 rounded-full opacity-25 animate-float" style={{ animationDelay: '2s' }}></div>
+      <div className="hidden lg:block absolute top-1/2 right-10 w-8 h-8 bg-rose-400 rounded-full opacity-20 animate-float" style={{ animationDelay: '3s' }}></div>
+      <div className="hidden lg:block absolute bottom-40 right-32 w-6 h-6 bg-elegant-400 rounded-full opacity-30 animate-float" style={{ animationDelay: '4s' }}></div>
     </section>
   );
 };
