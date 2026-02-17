@@ -16,14 +16,14 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { href: '#accueil', label: 'Accueil' },
-    { href: '#apropos', label: 'À propos' },
-    { href: '#savoir-faire', label: 'Savoir-faire' },
-    { href: '#projets', label: 'Projets' },
-    { href: '#galerie', label: 'Galerie' },
-    { href: '#valufam', label: 'ValuFam' },
-    { href: '#temoignages', label: 'Témoignages' },
-    { href: '#contact', label: 'Contact' },
+    { href: '/#accueil', label: 'Accueil' },
+    { href: '/#apropos', label: 'À propos' },
+    { href: '/services', label: 'Services' },
+    { href: '/#projets', label: 'Projets' },
+    { href: '/#galerie', label: 'Galerie' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/#valufam', label: 'ValuFam' },
+    { href: '/#contact', label: 'Contact' },
   ];
 
   return (
