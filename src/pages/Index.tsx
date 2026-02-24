@@ -9,6 +9,7 @@ import Gallery from '@/components/Gallery';
 import ValuFam from '@/components/ValuFam';
 import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
+import Newsletter from '@/components/Newsletter';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -23,6 +24,7 @@ const Index = () => {
       <ValuFam />
       <Testimonials />
       <Contact />
+      <Newsletter />
       <Footer />
     </div>
   );

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 import { FileText, MessageSquare, Briefcase, Users, Calendar, TrendingUp, Eye, ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { BarChart, Bar, XAxis, YAxis, PieChart, Pie, Cell, AreaChart, Area, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, PieChart, Pie, Cell, AreaChart, Area } from "recharts";
 
 const COLORS = ["#de6110", "#ec4899", "#3b82f6", "#10b981", "#f59e0b", "#8b5cf6"];
 
@@ -29,15 +31,24 @@ const StatCard = ({ title, value, icon: Icon, color, trend }: { title: string; v
   </Card>
 );
 
+const statusColors: Record<string, string> = {
+  pending: "bg-yellow-100 text-yellow-800",
+  confirmed: "bg-green-100 text-green-800",
+  cancelled: "bg-red-100 text-red-800",
+  completed: "bg-blue-100 text-blue-800",
+};
+
+const statusLabels: Record<string, string> = {
+  pending: "En attente", confirmed: "Confirmé", cancelled: "Annulé", completed: "Terminé",
+};
+
 const Dashboard = () => {
-  const [stats, setStats] = useState({
-    articles: 0, published: 0, messages: 0, unread: 0,
-    services: 0, bookings: 0, subscribers: 0,
-  });
+  const [stats, setStats] = useState({ articles: 0, published: 0, messages: 0, unread: 0, services: 0, bookings: 0, subscribers: 0 });
   const [servicesByCategory, setServicesByCategory] = useState<{ name: string; value: number }[]>([]);
-  const [bookingsByStatus, setBookingsByStatus] = useState<{ name: string; value: number }[]>([]);
   const [recentMessages, setRecentMessages] = useState<any[]>([]);
   const [articlesOverTime, setArticlesOverTime] = useState<{ month: string; articles: number }[]>([]);
+  const [bookingsByMonth, setBookingsByMonth] = useState<{ month: string; reservations: number }[]>([]);
+  const [recentBookings, setRecentBookings] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchAll = async () => {
@@ -62,23 +73,9 @@ const Dashboard = () => {
       const { data: svcData } = await supabase.from("services").select("category");
       if (svcData) {
         const catMap: Record<string, number> = {};
-        const catLabels: Record<string, string> = {
-          couture: "Couture", formation: "Formation", coaching: "Coaching",
-          consulting: "Consulting", conference: "Conférence", edition: "Édition",
-        };
+        const catLabels: Record<string, string> = { couture: "Couture", formation: "Formation", coaching: "Coaching", consulting: "Consulting", conference: "Conférence", edition: "Édition" };
         svcData.forEach((s) => { catMap[s.category] = (catMap[s.category] || 0) + 1; });
         setServicesByCategory(Object.entries(catMap).map(([k, v]) => ({ name: catLabels[k] || k, value: v })));
-      }
-
-      // Bookings by status
-      const { data: bkData } = await supabase.from("bookings").select("status");
-      if (bkData && bkData.length > 0) {
-        const statusMap: Record<string, number> = {};
-        const statusLabels: Record<string, string> = {
-          pending: "En attente", confirmed: "Confirmé", cancelled: "Annulé", completed: "Terminé",
-        };
-        bkData.forEach((b) => { statusMap[b.status] = (statusMap[b.status] || 0) + 1; });
-        setBookingsByStatus(Object.entries(statusMap).map(([k, v]) => ({ name: statusLabels[k] || k, value: v })));
       }
 
       // Recent messages
@@ -92,15 +89,33 @@ const Dashboard = () => {
         const now = new Date();
         for (let i = 5; i >= 0; i--) {
           const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-          const key = d.toLocaleDateString("fr-FR", { month: "short", year: "2-digit" });
-          months[key] = 0;
+          months[d.toLocaleDateString("fr-FR", { month: "short", year: "2-digit" })] = 0;
         }
         artData.forEach((a) => {
-          const d = new Date(a.created_at);
-          const key = d.toLocaleDateString("fr-FR", { month: "short", year: "2-digit" });
+          const key = new Date(a.created_at).toLocaleDateString("fr-FR", { month: "short", year: "2-digit" });
           if (key in months) months[key]++;
         });
         setArticlesOverTime(Object.entries(months).map(([month, articles]) => ({ month, articles })));
+      }
+
+      // Bookings over time (last 6 months)
+      const { data: bkData } = await supabase.from("bookings").select("created_at, booking_date, client_name, client_email, status, id");
+      if (bkData) {
+        const months: Record<string, number> = {};
+        const now = new Date();
+        for (let i = 5; i >= 0; i--) {
+          const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+          months[d.toLocaleDateString("fr-FR", { month: "short", year: "2-digit" })] = 0;
+        }
+        bkData.forEach((b) => {
+          const key = new Date(b.created_at).toLocaleDateString("fr-FR", { month: "short", year: "2-digit" });
+          if (key in months) months[key]++;
+        });
+        setBookingsByMonth(Object.entries(months).map(([month, reservations]) => ({ month, reservations })));
+
+        // Recent bookings (last 5)
+        const sorted = [...bkData].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).slice(0, 5);
+        setRecentBookings(sorted);
       }
     };
     fetchAll();
@@ -112,10 +127,10 @@ const Dashboard = () => {
   }, {} as Record<string, { label: string; color: string }>);
 
   const chartConfigArticles = { articles: { label: "Articles", color: "#de6110" } };
+  const chartConfigBookings = { reservations: { label: "Réservations", color: "#3b82f6" } };
 
   return (
     <div className="p-6 md:p-8 space-y-6">
-      {/* Header */}
       <div>
         <h1 className="text-2xl md:text-3xl font-playfair font-bold text-foreground">Tableau de bord</h1>
         <p className="text-sm text-muted-foreground mt-1">Vue d'ensemble de votre activité</p>
@@ -134,9 +149,8 @@ const Dashboard = () => {
         <StatCard title="Abonnés" value={stats.subscribers} icon={Users} color="bg-teal-500" trend={15} />
       </div>
 
-      {/* Charts Row */}
+      {/* Charts Row 1 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Articles over time */}
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-base font-semibold">Articles publiés</CardTitle>
@@ -164,19 +178,49 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Services by category */}
+        {/* Bookings by month */}
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base font-semibold">Réservations par mois</CardTitle>
+            <p className="text-xs text-muted-foreground">6 derniers mois</p>
+          </CardHeader>
+          <CardContent>
+            {bookingsByMonth.length > 0 ? (
+              <ChartContainer config={chartConfigBookings} className="h-[220px] w-full">
+                <BarChart data={bookingsByMonth} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="fillBookings" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.8} />
+                      <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.3} />
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} fontSize={11} />
+                  <YAxis tickLine={false} axisLine={false} fontSize={11} allowDecimals={false} />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <Bar dataKey="reservations" fill="url(#fillBookings)" radius={[6, 6, 0, 0]} />
+                </BarChart>
+              </ChartContainer>
+            ) : (
+              <p className="text-sm text-muted-foreground text-center py-12">Pas encore de réservations</p>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Charts Row 2 */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Services pie */}
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-base font-semibold">Services par catégorie</CardTitle>
-            <p className="text-xs text-muted-foreground">Répartition actuelle</p>
           </CardHeader>
           <CardContent>
             {servicesByCategory.length > 0 ? (
               <div className="flex items-center gap-4">
-                <ChartContainer config={chartConfigServices} className="h-[220px] w-[55%]">
+                <ChartContainer config={chartConfigServices} className="h-[200px] w-[55%]">
                   <PieChart>
                     <ChartTooltip content={<ChartTooltipContent />} />
-                    <Pie data={servicesByCategory} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={45} outerRadius={80} strokeWidth={2}>
+                    <Pie data={servicesByCategory} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={40} outerRadius={75} strokeWidth={2}>
                       {servicesByCategory.map((_, i) => (
                         <Cell key={i} fill={COLORS[i % COLORS.length]} />
                       ))}
@@ -195,6 +239,43 @@ const Dashboard = () => {
               </div>
             ) : (
               <p className="text-sm text-muted-foreground text-center py-12">Aucun service</p>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Recent bookings table */}
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base font-semibold">Dernières réservations</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {recentBookings.length > 0 ? (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-xs">Client</TableHead>
+                    <TableHead className="text-xs">Date</TableHead>
+                    <TableHead className="text-xs">Statut</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {recentBookings.map((b) => (
+                    <TableRow key={b.id}>
+                      <TableCell className="text-sm font-medium py-2">{b.client_name}</TableCell>
+                      <TableCell className="text-xs text-muted-foreground py-2">
+                        {new Date(b.booking_date).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}
+                      </TableCell>
+                      <TableCell className="py-2">
+                        <Badge className={`text-[10px] ${statusColors[b.status] || ""}`}>
+                          {statusLabels[b.status] || b.status}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            ) : (
+              <p className="text-sm text-muted-foreground text-center py-8">Aucune réservation</p>
             )}
           </CardContent>
         </Card>
@@ -231,7 +312,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Quick Actions + Bookings */}
+        {/* Quick Actions */}
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-base font-semibold">Actions rapides</CardTitle>
@@ -255,15 +336,6 @@ const Dashboard = () => {
                 <p className="text-[11px] text-muted-foreground">{stats.services} services actifs</p>
               </div>
             </a>
-            <a href="/admin/messages" className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/60 transition-colors group">
-              <div className="w-8 h-8 rounded-lg bg-rose-100 flex items-center justify-center group-hover:bg-rose-200 transition-colors">
-                <MessageSquare className="w-4 h-4 text-rose-700" />
-              </div>
-              <div>
-                <p className="text-sm font-medium">Messages</p>
-                <p className="text-[11px] text-muted-foreground">{stats.unread} non lu{stats.unread > 1 ? "s" : ""}</p>
-              </div>
-            </a>
             <a href="/admin/bookings" className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/60 transition-colors group">
               <div className="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center group-hover:bg-sky-200 transition-colors">
                 <Calendar className="w-4 h-4 text-sky-700" />
@@ -271,6 +343,15 @@ const Dashboard = () => {
               <div>
                 <p className="text-sm font-medium">Réservations</p>
                 <p className="text-[11px] text-muted-foreground">{stats.bookings} réservation{stats.bookings > 1 ? "s" : ""}</p>
+              </div>
+            </a>
+            <a href="/admin/messages" className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/60 transition-colors group">
+              <div className="w-8 h-8 rounded-lg bg-rose-100 flex items-center justify-center group-hover:bg-rose-200 transition-colors">
+                <MessageSquare className="w-4 h-4 text-rose-700" />
+              </div>
+              <div>
+                <p className="text-sm font-medium">Messages</p>
+                <p className="text-[11px] text-muted-foreground">{stats.unread} non lu{stats.unread > 1 ? "s" : ""}</p>
               </div>
             </a>
           </CardContent>
