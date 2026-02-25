@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, ArrowLeft } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
+import ShareButtons from "@/components/ShareButtons";
 
 const BlogArticle = () => {
   const { slug } = useParams();
@@ -91,13 +92,17 @@ const BlogArticle = () => {
             <ReactMarkdown>{article.content}</ReactMarkdown>
           </div>
 
-          {article.hashtags && article.hashtags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-8 pt-6 border-t">
-              {article.hashtags.map((h: string, i: number) => (
-                <Badge key={i} variant="outline" className="text-elegant-600">{h}</Badge>
-              ))}
-            </div>
-          )}
+          {/* Share buttons */}
+          <div className="mt-8 pt-6 border-t flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <ShareButtons title={article.title} />
+            {article.hashtags && article.hashtags.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {article.hashtags.map((h: string, i: number) => (
+                  <Badge key={i} variant="outline" className="text-elegant-600">{h}</Badge>
+                ))}
+              </div>
+            )}
+          </div>
         </article>
       </main>
       <Footer />

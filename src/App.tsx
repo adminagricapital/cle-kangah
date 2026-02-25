@@ -18,7 +18,9 @@ import AdminBookings from "./pages/admin/AdminBookings";
 import AdminNewsletter from "./pages/admin/AdminNewsletter";
 import AdminSettings from "./pages/admin/AdminSettings";
 import NotFound from "./pages/NotFound";
+import MentionsLegales from "./pages/MentionsLegales";
 import Clemencia from "./components/Clemencia";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +36,7 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogArticle />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/mentions-legales" element={<MentionsLegales />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="articles" element={<AdminArticles />} />
@@ -48,6 +51,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Clemencia />
+        <WhatsAppButton />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
