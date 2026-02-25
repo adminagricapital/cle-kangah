@@ -15,6 +15,7 @@ import ArticleEditor from "./pages/admin/ArticleEditor";
 import AdminMessages from "./pages/admin/AdminMessages";
 import AdminServicesPage from "./pages/admin/AdminServicesPage";
 import AdminBookings from "./pages/admin/AdminBookings";
+import AdminNewsletter from "./pages/admin/AdminNewsletter";
 import AdminSettings from "./pages/admin/AdminSettings";
 import NotFound from "./pages/NotFound";
 import Clemencia from "./components/Clemencia";
@@ -41,6 +42,7 @@ const App = () => (
             <Route path="services" element={<AdminServicesPage />} />
             <Route path="bookings" element={<AdminBookings />} />
             <Route path="messages" element={<AdminMessages />} />
+            <Route path="newsletter" element={<AdminNewsletter />} />
             <Route path="settings" element={<AdminSettings />} />
           </Route>
           <Route path="*" element={<NotFound />} />

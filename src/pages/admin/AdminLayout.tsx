@@ -13,6 +13,7 @@ const navItems = [
   { to: "/admin/services", icon: Briefcase, label: "Services" },
   { to: "/admin/bookings", icon: Calendar, label: "Réservations" },
   { to: "/admin/messages", icon: MessageSquare, label: "Messages" },
+  { to: "/admin/newsletter", icon: Users, label: "Newsletter" },
   { to: "/admin/settings", icon: Settings, label: "Paramètres" },
 ];
 
