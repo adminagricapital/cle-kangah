@@ -19,7 +19,7 @@ const Navbar = () => {
     { href: '/#accueil', label: 'Accueil' },
     { href: '/#apropos', label: 'À propos' },
     { href: '/services', label: 'Services' },
-    { href: '/#projets', label: 'Projets' },
+    { href: '/#ouvrages', label: 'Mes Ouvrages' },
     { href: '/#galerie', label: 'Galerie' },
     { href: '/blog', label: 'Blog' },
     { href: '/#valufam', label: 'ValuFam' },

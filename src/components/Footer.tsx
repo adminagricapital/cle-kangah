@@ -25,7 +25,7 @@ const Footer = () => {
               <ul className="space-y-2 text-elegant-300">
                 <li><a href="#accueil" className="hover:text-white transition-colors">Accueil</a></li>
                 <li><a href="#apropos" className="hover:text-white transition-colors">À propos</a></li>
-                <li><a href="#projets" className="hover:text-white transition-colors">Projets</a></li>
+                <li><a href="#ouvrages" className="hover:text-white transition-colors">Mes Ouvrages</a></li>
                 <li><a href="#valufam" className="hover:text-white transition-colors">ValuFam</a></li>
                 <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
               </ul>
@@ -47,7 +47,7 @@ const Footer = () => {
           <div className="border-t border-elegant-700 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-elegant-300 text-sm">
-                © 2024 Clémence KANGAH. Tous droits réservés.
+                © 2026 Clémence KANGAH. Tous droits réservés. | <a href="/mentions-legales" className="hover:text-white underline">Mentions légales</a>
               </p>
               <p className="text-elegant-300 text-sm flex items-center">
                 Créé avec <Heart className="w-4 h-4 text-rose-400 mx-1" /> et passion

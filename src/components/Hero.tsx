@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowDown, Heart, Sparkles, Users, BookOpen, Scissors, Award, Star, Globe, Lightbulb, Target } from 'lucide-react';
+import { ArrowDown, Heart, Sparkles } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -13,10 +13,10 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
-        <div className="max-w-6xl mx-auto">
-          {/* Photo de Clémence */}
-          <div className="mb-8 md:mb-12 animate-fade-up">
-            <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-2xl">
+        <div className="max-w-4xl mx-auto">
+          {/* Photo */}
+          <div className="mb-8 animate-fade-up">
+            <div className="w-36 h-36 md:w-44 md:h-44 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-2xl">
               <img 
                 src="/lovable-uploads/fac15059-22a8-44a1-8a93-e841d8edee86.png"
                 alt="Clémence KANGAH"
@@ -33,137 +33,19 @@ const Hero = () => {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl lg:text-2xl text-elegant-700 mb-6 md:mb-8 animate-fade-up px-4" style={{ animationDelay: '0.2s' }}>
+          <p className="text-lg md:text-xl lg:text-2xl text-elegant-700 mb-8 animate-fade-up px-4" style={{ animationDelay: '0.2s' }}>
             Nouvelle Trace Féminine – À la couture de l&apos;être et à l&apos;ouvrage du monde
           </p>
 
-          {/* Citation inspirante */}
-          <div className="max-w-3xl mx-auto mb-8 md:mb-10 animate-fade-up px-4" style={{ animationDelay: '0.3s' }}>
+          {/* Citation */}
+          <div className="max-w-3xl mx-auto mb-10 animate-fade-up px-4" style={{ animationDelay: '0.3s' }}>
             <blockquote className="text-lg md:text-xl font-playfair italic text-rose-700 border-l-4 border-rose-300 pl-6 py-4 bg-white/30 backdrop-blur-sm rounded-lg">
               &quot;Chaque point de couture est une prière, chaque création est un acte de foi vers un monde meilleur.&quot;
             </blockquote>
           </div>
 
-          {/* Description */}
-          <div className="max-w-4xl mx-auto mb-8 md:mb-12 animate-fade-up px-4" style={{ animationDelay: '0.4s' }}>
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4 md:mb-6">
-              Bienvenue sur mon espace personnel. Je suis <strong>Clémence KANGAH</strong>, femme de foi, 
-              couturière de formation, auteure, coordinatrice de projets communautaires et initiatrice 
-              de solutions concrètes pour une Afrique plus forte.
-            </p>
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-              Ce site est le reflet de mon cheminement, de mes valeurs, de mes réalisations et de ma vision pour l&apos;avenir.
-            </p>
-          </div>
-
-          {/* Domaines d'expertise */}
-          <div className="max-w-5xl mx-auto mb-8 md:mb-12 animate-fade-up px-4" style={{ animationDelay: '0.45s' }}>
-            <h3 className="text-xl md:text-2xl font-playfair font-bold text-elegant-800 mb-6">Mes domaines d&apos;expertise</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-              <div className="bg-white/50 backdrop-blur-sm rounded-lg p-4 md:p-6 text-center">
-                <Scissors className="w-8 h-8 md:w-10 md:h-10 text-elegant-600 mx-auto mb-3" />
-                <h4 className="font-semibold text-elegant-800 mb-2">Couture & Mode</h4>
-                <p className="text-sm text-gray-600">Création, formation et transmission des savoir-faire traditionnels</p>
-              </div>
-              <div className="bg-white/50 backdrop-blur-sm rounded-lg p-4 md:p-6 text-center">
-                <BookOpen className="w-8 h-8 md:w-10 md:h-10 text-rose-600 mx-auto mb-3" />
-                <h4 className="font-semibold text-elegant-800 mb-2">Écriture & Édition</h4>
-                <p className="text-sm text-gray-600">Auteure de livres inspirants et guides pratiques</p>
-              </div>
-              <div className="bg-white/50 backdrop-blur-sm rounded-lg p-4 md:p-6 text-center">
-                <Users className="w-8 h-8 md:w-10 md:h-10 text-coral-600 mx-auto mb-3" />
-                <h4 className="font-semibold text-elegant-800 mb-2">Développement Social</h4>
-                <p className="text-sm text-gray-600">Coordination de projets communautaires et formation</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Valeurs clés */}
-          <div className="max-w-4xl mx-auto mb-8 md:mb-12 animate-fade-up px-4" style={{ animationDelay: '0.47s' }}>
-            <h3 className="text-xl md:text-2xl font-playfair font-bold text-elegant-800 mb-6">Mes valeurs fondamentales</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-              <div className="bg-gradient-to-br from-rose-100 to-rose-200 rounded-lg p-3 md:p-4 text-center">
-                <Heart className="w-6 h-6 md:w-8 md:h-8 text-rose-600 mx-auto mb-2" />
-                <span className="text-sm md:text-base font-semibold text-rose-800">Bienveillance</span>
-              </div>
-              <div className="bg-gradient-to-br from-elegant-100 to-elegant-200 rounded-lg p-3 md:p-4 text-center">
-                <Star className="w-6 h-6 md:w-8 md:h-8 text-elegant-600 mx-auto mb-2" />
-                <span className="text-sm md:text-base font-semibold text-elegant-800">Excellence</span>
-              </div>
-              <div className="bg-gradient-to-br from-coral-100 to-coral-200 rounded-lg p-3 md:p-4 text-center">
-                <Globe className="w-6 h-6 md:w-8 md:h-8 text-coral-600 mx-auto mb-2" />
-                <span className="text-sm md:text-base font-semibold text-coral-800">Inclusion</span>
-              </div>
-              <div className="bg-gradient-to-br from-rose-100 to-elegant-100 rounded-lg p-3 md:p-4 text-center">
-                <Lightbulb className="w-6 h-6 md:w-8 md:h-8 text-elegant-600 mx-auto mb-2" />
-                <span className="text-sm md:text-base font-semibold text-elegant-800">Innovation</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Statistiques/Chiffres clés */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12 animate-fade-up px-4" style={{ animationDelay: '0.5s' }}>
-            <div className="bg-white/40 backdrop-blur-sm rounded-lg p-4 md:p-6 text-center">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-elegant-100 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-3">
-                <Scissors className="w-5 h-5 md:w-6 md:h-6 text-elegant-600" />
-              </div>
-              <div className="text-2xl md:text-3xl font-bold text-elegant-800">15+</div>
-              <div className="text-xs md:text-sm text-gray-600">Années d&apos;expérience</div>
-            </div>
-            
-            <div className="bg-white/40 backdrop-blur-sm rounded-lg p-4 md:p-6 text-center">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-3">
-                <Users className="w-5 h-5 md:w-6 md:h-6 text-rose-600" />
-              </div>
-              <div className="text-2xl md:text-3xl font-bold text-elegant-800">500+</div>
-              <div className="text-xs md:text-sm text-gray-600">Vies impactées</div>
-            </div>
-            
-            <div className="bg-white/40 backdrop-blur-sm rounded-lg p-4 md:p-6 text-center">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-coral-100 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-3">
-                <BookOpen className="w-5 h-5 md:w-6 md:h-6 text-coral-600" />
-              </div>
-              <div className="text-2xl md:text-3xl font-bold text-elegant-800">3</div>
-              <div className="text-xs md:text-sm text-gray-600">Livres publiés</div>
-            </div>
-            
-            <div className="bg-white/40 backdrop-blur-sm rounded-lg p-4 md:p-6 text-center">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-elegant-100 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-3">
-                <Award className="w-5 h-5 md:w-6 md:h-6 text-elegant-600" />
-              </div>
-              <div className="text-2xl md:text-3xl font-bold text-elegant-800">10+</div>
-              <div className="text-xs md:text-sm text-gray-600">Projets réalisés</div>
-            </div>
-          </div>
-
-          {/* Mission et vision */}
-          <div className="max-w-5xl mx-auto mb-8 md:mb-12 animate-fade-up px-4" style={{ animationDelay: '0.55s' }}>
-            <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-              <div className="bg-gradient-to-br from-rose-50 to-rose-100 rounded-lg p-6 md:p-8">
-                <div className="flex items-center mb-4">
-                  <Target className="w-6 h-6 md:w-8 md:h-8 text-rose-600 mr-3" />
-                  <h3 className="text-lg md:text-xl font-playfair font-bold text-rose-800">Ma Mission</h3>
-                </div>
-                <p className="text-sm md:text-base text-gray-700 leading-relaxed">
-                  Accompagner les femmes africaines dans leur épanouissement personnel et professionnel, 
-                  en alliant tradition et modernité pour bâtir des communautés plus fortes et solidaires.
-                </p>
-              </div>
-              <div className="bg-gradient-to-br from-elegant-50 to-elegant-100 rounded-lg p-6 md:p-8">
-                <div className="flex items-center mb-4">
-                  <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-elegant-600 mr-3" />
-                  <h3 className="text-lg md:text-xl font-playfair font-bold text-elegant-800">Ma Vision</h3>
-                </div>
-                <p className="text-sm md:text-base text-gray-700 leading-relaxed">
-                  Une Afrique où chaque femme peut exprimer pleinement son potentiel, 
-                  où les savoir-faire traditionnels nourrissent l&apos;innovation contemporaine.
-                </p>
-              </div>
-            </div>
-          </div>
-
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center animate-fade-up px-4" style={{ animationDelay: '0.6s' }}>
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center animate-fade-up px-4" style={{ animationDelay: '0.4s' }}>
             <Button 
               size="lg" 
               className="bg-elegant-600 hover:bg-elegant-700 text-white px-6 md:px-8 py-3 text-base md:text-lg w-full sm:w-auto"
@@ -176,10 +58,10 @@ const Hero = () => {
               variant="outline" 
               size="lg" 
               className="border-elegant-600 text-elegant-600 hover:bg-elegant-50 px-6 md:px-8 py-3 text-base md:text-lg w-full sm:w-auto"
-              onClick={() => document.getElementById('projets')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => document.getElementById('ouvrages')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <Sparkles className="w-4 h-4 md:w-5 md:h-5 mr-2" />
-              Mes projets
+              Mes ouvrages
             </Button>
             <Button 
               variant="outline" 
@@ -190,24 +72,6 @@ const Hero = () => {
               Me contacter
             </Button>
           </div>
-
-          {/* Message d'inspiration final */}
-          <div className="mt-8 md:mt-12 animate-fade-up px-4" style={{ animationDelay: '0.7s' }}>
-            <div className="bg-white/40 backdrop-blur-sm rounded-lg p-6 md:p-8 max-w-3xl mx-auto border border-white/50">
-              <p className="text-base md:text-lg text-gray-700 mb-4 leading-relaxed">
-                <span className="text-rose-600 font-semibold">Ensemble, tissons l&apos;avenir</span> – 
-                Rejoignez-moi dans cette aventure où tradition et modernité se rencontrent pour 
-                transformer les communautés africaines et révéler le potentiel extraordinaire de chaque femme.
-              </p>
-              <div className="flex justify-center">
-                <div className="flex items-center space-x-2 text-elegant-600">
-                  <Star className="w-4 h-4" />
-                  <span className="text-sm font-medium">Nouvelle Trace Féminine</span>
-                  <Star className="w-4 h-4" />
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Scroll indicator */}
@@ -216,12 +80,10 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Floating elements - cachés sur mobile */}
+      {/* Floating elements */}
       <div className="hidden md:block absolute top-20 left-10 w-16 h-16 lg:w-20 lg:h-20 bg-rose-200 rounded-full opacity-20 animate-float"></div>
       <div className="hidden md:block absolute top-40 right-20 w-12 h-12 lg:w-16 lg:h-16 bg-elegant-300 rounded-full opacity-30 animate-float" style={{ animationDelay: '1s' }}></div>
       <div className="hidden md:block absolute bottom-32 left-20 w-10 h-10 lg:w-12 lg:h-12 bg-coral-300 rounded-full opacity-25 animate-float" style={{ animationDelay: '2s' }}></div>
-      <div className="hidden lg:block absolute top-1/2 right-10 w-8 h-8 bg-rose-400 rounded-full opacity-20 animate-float" style={{ animationDelay: '3s' }}></div>
-      <div className="hidden lg:block absolute bottom-40 right-32 w-6 h-6 bg-elegant-400 rounded-full opacity-30 animate-float" style={{ animationDelay: '4s' }}></div>
     </section>
   );
 };
