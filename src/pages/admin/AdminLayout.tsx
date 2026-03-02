@@ -3,7 +3,7 @@ import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
 import { useAdmin } from "@/hooks/useAdmin";
 import { useAuth } from "@/hooks/useAuth";
 import {
-  LayoutDashboard, FileText, Briefcase, MessageSquare, Users, Settings, LogOut, Scissors, ChevronLeft, Calendar
+  LayoutDashboard, FileText, Briefcase, MessageSquare, Users, Settings, LogOut, Scissors, ChevronLeft, Calendar, Package
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -12,6 +12,7 @@ const navItems = [
   { to: "/admin/articles", icon: FileText, label: "Articles" },
   { to: "/admin/services", icon: Briefcase, label: "Services" },
   { to: "/admin/bookings", icon: Calendar, label: "Réservations" },
+  { to: "/admin/orders", icon: Package, label: "Commandes" },
   { to: "/admin/messages", icon: MessageSquare, label: "Messages" },
   { to: "/admin/newsletter", icon: Users, label: "Newsletter" },
   { to: "/admin/settings", icon: Settings, label: "Paramètres" },
@@ -39,7 +40,6 @@ const AdminLayout = () => {
 
   return (
     <div className="min-h-screen flex bg-muted">
-      {/* Sidebar */}
       <aside className="w-64 bg-card border-r border-border flex flex-col">
         <div className="p-6 border-b border-border">
           <div className="flex items-center space-x-2">
@@ -83,8 +83,6 @@ const AdminLayout = () => {
           </Button>
         </div>
       </aside>
-
-      {/* Main content */}
       <main className="flex-1 overflow-auto">
         <Outlet />
       </main>
