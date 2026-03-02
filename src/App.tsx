@@ -8,6 +8,8 @@ import Auth from "./pages/Auth";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 import Services from "./pages/Services";
+import Atelier from "./pages/Atelier";
+import Commander from "./pages/Commander";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import AdminArticles from "./pages/admin/AdminArticles";
@@ -16,6 +18,7 @@ import AdminMessages from "./pages/admin/AdminMessages";
 import AdminServicesPage from "./pages/admin/AdminServicesPage";
 import AdminBookings from "./pages/admin/AdminBookings";
 import AdminNewsletter from "./pages/admin/AdminNewsletter";
+import AdminOrders from "./pages/admin/AdminOrders";
 import AdminSettings from "./pages/admin/AdminSettings";
 import NotFound from "./pages/NotFound";
 import MentionsLegales from "./pages/MentionsLegales";
@@ -36,6 +39,8 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogArticle />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/atelier" element={<Atelier />} />
+          <Route path="/commander" element={<Commander />} />
           <Route path="/mentions-legales" element={<MentionsLegales />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
@@ -44,6 +49,7 @@ const App = () => (
             <Route path="articles/new" element={<ArticleEditor />} />
             <Route path="services" element={<AdminServicesPage />} />
             <Route path="bookings" element={<AdminBookings />} />
+            <Route path="orders" element={<AdminOrders />} />
             <Route path="messages" element={<AdminMessages />} />
             <Route path="newsletter" element={<AdminNewsletter />} />
             <Route path="settings" element={<AdminSettings />} />

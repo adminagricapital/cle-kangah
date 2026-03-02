@@ -151,6 +151,72 @@ export type Database = {
         }
         Relationships: []
       }
+      custom_orders: {
+        Row: {
+          client_email: string
+          client_name: string
+          client_phone: string
+          created_at: string
+          delivery_date: string | null
+          ethnic_fabric: string | null
+          fabric_type: string
+          garment_category: string
+          garment_type: string
+          gender: string
+          id: string
+          measurements: Json | null
+          notes: string | null
+          occasion: string | null
+          quantity: number
+          reference_image: string | null
+          status: string
+          total_estimate: number | null
+          updated_at: string
+        }
+        Insert: {
+          client_email: string
+          client_name: string
+          client_phone: string
+          created_at?: string
+          delivery_date?: string | null
+          ethnic_fabric?: string | null
+          fabric_type: string
+          garment_category: string
+          garment_type: string
+          gender?: string
+          id?: string
+          measurements?: Json | null
+          notes?: string | null
+          occasion?: string | null
+          quantity?: number
+          reference_image?: string | null
+          status?: string
+          total_estimate?: number | null
+          updated_at?: string
+        }
+        Update: {
+          client_email?: string
+          client_name?: string
+          client_phone?: string
+          created_at?: string
+          delivery_date?: string | null
+          ethnic_fabric?: string | null
+          fabric_type?: string
+          garment_category?: string
+          garment_type?: string
+          gender?: string
+          id?: string
+          measurements?: Json | null
+          notes?: string | null
+          occasion?: string | null
+          quantity?: number
+          reference_image?: string | null
+          status?: string
+          total_estimate?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           created_at: string

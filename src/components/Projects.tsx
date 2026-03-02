@@ -1,7 +1,10 @@
 
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
-import { BookOpen, ExternalLink } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
+import bookErreur from '@/assets/book-erreur-femme.jpg';
+import bookEglise from '@/assets/book-eglise.jpg';
+import bookCouple from '@/assets/book-couple.jpg';
 
 const books = [
   {
@@ -11,6 +14,7 @@ const books = [
     statusColor: "bg-elegant-600",
     gradient: "from-elegant-50 to-elegant-100",
     borderColor: "border-elegant-200",
+    image: bookErreur,
   },
   {
     title: "Toujours à l'église mais jamais avec Dieu",
@@ -19,6 +23,7 @@ const books = [
     statusColor: "bg-rose-600",
     gradient: "from-rose-50 to-rose-100",
     borderColor: "border-rose-200",
+    image: bookEglise,
   },
   {
     title: "Es-tu en couple avec toi-même ?",
@@ -28,6 +33,7 @@ const books = [
     gradient: "from-coral-50 to-coral-100",
     borderColor: "border-coral-200",
     upcoming: true,
+    image: bookCouple,
   },
 ];
 
@@ -36,7 +42,6 @@ const Projects = () => {
     <section id="ouvrages" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 mb-4">
               <BookOpen className="w-6 h-6 text-rose-600" />
@@ -51,33 +56,32 @@ const Projects = () => {
             </p>
           </div>
 
-          {/* Books Grid */}
           <div className="grid md:grid-cols-3 gap-8">
             {books.map((book, index) => (
               <div 
                 key={index} 
                 className={`group relative bg-gradient-to-br ${book.gradient} border ${book.borderColor} rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
               >
-                {/* Book spine accent */}
                 <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${book.statusColor}`}></div>
                 
-                <div className="p-6 md:p-8 pl-8">
-                  {/* Status badge */}
-                  <Badge className={`${book.statusColor} text-white mb-4 ${book.upcoming ? 'animate-pulse' : ''}`}>
-                    {book.status}
-                  </Badge>
-                  
-                  {/* Book icon */}
-                  <div className="w-14 h-14 rounded-xl bg-white/70 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                    <BookOpen className="w-7 h-7 text-elegant-600" />
+                {/* Book cover image */}
+                <div className="relative h-64 overflow-hidden">
+                  <img 
+                    src={book.image} 
+                    alt={`Couverture - ${book.title}`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-3 right-3">
+                    <Badge className={`${book.statusColor} text-white ${book.upcoming ? 'animate-pulse' : ''}`}>
+                      {book.status}
+                    </Badge>
                   </div>
+                </div>
 
-                  {/* Title */}
+                <div className="p-6 pl-8">
                   <h3 className="text-xl font-playfair font-bold text-elegant-800 mb-3 leading-snug">
                     {book.title}
                   </h3>
-
-                  {/* Description */}
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {book.description}
                   </p>
