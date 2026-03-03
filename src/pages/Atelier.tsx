@@ -60,7 +60,7 @@ const Atelier = () => {
         <div className="relative z-10 container mx-auto px-4 text-center text-white py-32">
           <Badge className="bg-elegant-600 text-white mb-4 text-sm">Atelier de Haute Couture</Badge>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold mb-6">
-            Mon Atelier
+            CK Couture
           </h1>
           <p className="text-lg md:text-xl max-w-3xl mx-auto mb-8 text-white/90">
             Un espace créatif de 30 personnes dédié à l'excellence de la couture africaine — 
@@ -73,7 +73,7 @@ const Atelier = () => {
               </Button>
             </Link>
             <Link to="/services">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/20 px-8">
+              <Button size="lg" variant="outline" className="border-white/70 text-white hover:bg-white/20 bg-transparent px-8">
                 Voir nos services
               </Button>
             </Link>
