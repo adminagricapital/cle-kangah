@@ -20,7 +20,7 @@ const Navbar = () => {
   const navItems = [
     { href: '/#accueil', label: 'Accueil' },
     { href: '/#apropos', label: 'À propos' },
-    { href: '/atelier', label: 'Mon Atelier' },
+    { href: '/atelier', label: 'CK Couture' },
     { href: '/services', label: 'Services' },
     { href: '/#ouvrages', label: 'Mes Ouvrages' },
     { href: '/commander', label: 'Commander' },

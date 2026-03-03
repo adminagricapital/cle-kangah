@@ -4,8 +4,10 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Skills from '@/components/Skills';
+import AtelierPreview from '@/components/AtelierPreview';
 import Projects from '@/components/Projects';
 import Gallery from '@/components/Gallery';
+import BoutiquePreview from '@/components/BoutiquePreview';
 import ValuFam from '@/components/ValuFam';
 import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
@@ -19,8 +21,10 @@ const Index = () => {
       <Hero />
       <About />
       <Skills />
+      <AtelierPreview />
       <Projects />
       <Gallery />
+      <BoutiquePreview />
       <ValuFam />
       <Testimonials />
       <Contact />

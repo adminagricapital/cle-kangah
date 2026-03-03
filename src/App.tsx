@@ -24,6 +24,7 @@ import NotFound from "./pages/NotFound";
 import MentionsLegales from "./pages/MentionsLegales";
 import Clemencia from "./components/Clemencia";
 import WhatsAppButton from "./components/WhatsAppButton";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
