@@ -5,21 +5,80 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Scissors, CheckCircle, Loader2, Ruler } from "lucide-react";
+import { Scissors, CheckCircle, Loader2, Ruler, CreditCard, Smartphone } from "lucide-react";
+import collectionHomme from "@/assets/collection-homme.jpg";
+import collectionEnfants from "@/assets/collection-enfants.jpg";
+import journeeFemme from "@/assets/journee-femme.jpg";
+import tissus from "@/assets/tissus-varietes.jpg";
+import robeSoiree from "@/assets/robe-soiree-rouge.jpg";
+import fashionShow from "@/assets/fashion-show.jpg";
+import choristes from "@/assets/choristes.jpg";
+import tenuePro from "@/assets/tenue-professionnelle.jpg";
 
-const genderOptions = ["Femme", "Homme", "Enfant"];
+// Visual selector component
+const VisualSelector = ({ label, options, value, onChange, required }: {
+  label: string;
+  options: { value: string; label: string; image?: string }[];
+  value: string;
+  onChange: (v: string) => void;
+  required?: boolean;
+}) => (
+  <div>
+    <Label>{label} {required && "*"}</Label>
+    <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mt-2 max-h-64 overflow-y-auto">
+      {options.map((opt) => (
+        <button
+          key={opt.value}
+          type="button"
+          onClick={() => onChange(opt.value)}
+          className={`relative rounded-xl overflow-hidden border-2 transition-all text-left ${
+            value === opt.value
+              ? "border-elegant-600 ring-2 ring-elegant-300 shadow-lg"
+              : "border-border hover:border-elegant-300"
+          }`}
+        >
+          {opt.image && (
+            <img src={opt.image} alt={opt.label} className="w-full h-16 object-cover" />
+          )}
+          <div className={`px-2 py-1.5 text-xs font-medium truncate ${opt.image ? '' : 'py-3 text-center'} ${
+            value === opt.value ? "bg-elegant-50 text-elegant-700" : "text-foreground"
+          }`}>
+            {opt.label}
+          </div>
+          {value === opt.value && (
+            <div className="absolute top-1 right-1 w-4 h-4 bg-elegant-600 rounded-full flex items-center justify-center">
+              <CheckCircle className="w-3 h-3 text-white" />
+            </div>
+          )}
+        </button>
+      ))}
+    </div>
+  </div>
+);
+
+const genderOptions = [
+  { value: "Femme", label: "Femme", image: journeeFemme },
+  { value: "Homme", label: "Homme", image: collectionHomme },
+  { value: "Enfant", label: "Enfant", image: collectionEnfants },
+];
+
+const garmentImages: Record<string, string> = {
+  "Robe de soirée": robeSoiree, "Robe longue": robeSoiree, "Robe courte": journeeFemme,
+  "Costume complet": collectionHomme, "Veste": tenuePro, "Pantalon": collectionHomme,
+  "Tenue de cérémonie": fashionShow, "Tenue de choriste": choristes,
+  "Tenue professionnelle": tenuePro, "Robe fille": collectionEnfants,
+};
 
 const garmentCategories: Record<string, string[]> = {
   Femme: [
     "Robe longue", "Robe courte", "Robe de soirée", "Robe de mariée",
-    "Jupe maxi", "Jupe midi", "Jupe crayon", "Jupe patineuse", "Jupe droite",
+    "Jupe maxi", "Jupe midi", "Jupe crayon", "Jupe patineuse",
     "Ensemble tailleur", "Blouse", "Chemisier", "Pantalon", "Combinaison",
     "Boubou", "Caftan", "Pagne noué", "Corsage", "Tunique",
-    "Tenue de cérémonie", "Tenue de Miss", "Tenue de choriste",
+    "Tenue de cérémonie", "Tenue de choriste",
   ],
   Homme: [
     "Costume complet", "Veste", "Pantalon", "Chemise", "Polo",
@@ -32,11 +91,16 @@ const garmentCategories: Record<string, string[]> = {
   ],
 };
 
-const fabricTypes = [
-  "Wax (pagne imprimé)", "Bazin riche", "Bazin getzner", "Kita (coton tissé)",
-  "Soie", "Satin", "Dentelle", "Mousseline", "Lin", "Coton uni",
-  "Velours", "Brocart", "Organza", "Taffetas", "Crêpe",
-  "Gabardine", "Jean/Denim", "Tissu kente", "Bogolan",
+const fabricOptions = [
+  { value: "Wax (pagne imprimé)", label: "Wax", image: tissus },
+  { value: "Bazin riche", label: "Bazin riche", image: tissus },
+  { value: "Soie", label: "Soie" }, { value: "Satin", label: "Satin" },
+  { value: "Dentelle", label: "Dentelle" }, { value: "Mousseline", label: "Mousseline" },
+  { value: "Lin", label: "Lin" }, { value: "Coton uni", label: "Coton" },
+  { value: "Velours", label: "Velours" }, { value: "Brocart", label: "Brocart" },
+  { value: "Organza", label: "Organza" }, { value: "Crêpe", label: "Crêpe" },
+  { value: "Gabardine", label: "Gabardine" }, { value: "Jean/Denim", label: "Denim" },
+  { value: "Kente", label: "Kente" }, { value: "Bogolan", label: "Bogolan" },
 ];
 
 const ethnicFabrics = [
@@ -54,6 +118,13 @@ const occasionOptions = [
   "Tenue quotidienne", "Autre",
 ];
 
+const paymentMethods = [
+  { value: "orange_money", label: "Orange Money", color: "bg-orange-500" },
+  { value: "wave", label: "Wave", color: "bg-blue-500" },
+  { value: "mtn_money", label: "MTN Money", color: "bg-yellow-500" },
+  { value: "sur_place", label: "Paiement sur place", color: "bg-elegant-500" },
+];
+
 const Commander = () => {
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
@@ -62,7 +133,7 @@ const Commander = () => {
     client_name: "", client_email: "", client_phone: "",
     gender: "", garment_type: "", garment_category: "",
     fabric_type: "", ethnic_fabric: "", quantity: "1",
-    occasion: "", delivery_date: "", notes: "",
+    occasion: "", delivery_date: "", notes: "", payment_method: "",
     tour_poitrine: "", tour_taille: "", tour_hanches: "",
     longueur: "", tour_bras: "", epaules: "",
   });
@@ -74,33 +145,24 @@ const Commander = () => {
     setSubmitting(true);
 
     const measurements = {
-      tour_poitrine: form.tour_poitrine,
-      tour_taille: form.tour_taille,
-      tour_hanches: form.tour_hanches,
-      longueur: form.longueur,
-      tour_bras: form.tour_bras,
-      epaules: form.epaules,
+      tour_poitrine: form.tour_poitrine, tour_taille: form.tour_taille,
+      tour_hanches: form.tour_hanches, longueur: form.longueur,
+      tour_bras: form.tour_bras, epaules: form.epaules,
     };
 
     const { error } = await supabase.from("custom_orders").insert({
-      client_name: form.client_name,
-      client_email: form.client_email,
-      client_phone: form.client_phone,
-      gender: form.gender.toLowerCase(),
-      garment_type: form.garment_type,
-      garment_category: form.garment_category,
-      fabric_type: form.fabric_type,
-      ethnic_fabric: form.ethnic_fabric || null,
-      quantity: parseInt(form.quantity) || 1,
-      measurements,
-      occasion: form.occasion || null,
-      delivery_date: form.delivery_date || null,
-      notes: form.notes || null,
+      client_name: form.client_name, client_email: form.client_email,
+      client_phone: form.client_phone, gender: form.gender.toLowerCase(),
+      garment_type: form.garment_type, garment_category: form.garment_category,
+      fabric_type: form.fabric_type, ethnic_fabric: form.ethnic_fabric || null,
+      quantity: parseInt(form.quantity) || 1, measurements,
+      occasion: form.occasion || null, delivery_date: form.delivery_date || null,
+      notes: form.notes ? `${form.notes}\n\nPaiement: ${form.payment_method}` : `Paiement: ${form.payment_method}`,
     });
 
     setSubmitting(false);
     if (error) {
-      toast({ title: "Erreur", description: "Impossible d'envoyer la commande. Réessayez.", variant: "destructive" });
+      toast({ title: "Erreur", description: "Impossible d'envoyer la commande.", variant: "destructive" });
       return;
     }
     setSuccess(true);
@@ -116,8 +178,7 @@ const Commander = () => {
             <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-6" />
             <h1 className="text-3xl font-playfair font-bold text-elegant-800 mb-4">Commande envoyée !</h1>
             <p className="text-muted-foreground mb-8">
-              Merci pour votre confiance. Notre équipe vous contactera dans les 24h 
-              pour confirmer les détails et planifier votre rendez-vous de prise de mesures.
+              Merci pour votre confiance. Notre équipe vous contactera dans les 24h.
             </p>
             <Button onClick={() => setSuccess(false)} className="bg-elegant-600 hover:bg-elegant-700">
               Nouvelle commande
@@ -130,6 +191,9 @@ const Commander = () => {
   }
 
   const currentGarments = garmentCategories[form.gender] || [];
+  const garmentOpts = currentGarments.map(g => ({
+    value: g, label: g, image: garmentImages[g],
+  }));
 
   return (
     <div className="min-h-screen">
@@ -143,23 +207,20 @@ const Commander = () => {
             </h1>
             <div className="w-24 h-1 bg-gradient-to-r from-elegant-400 to-rose-400 mx-auto mb-3" />
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Remplissez le formulaire ci-dessous pour passer votre commande de couture sur mesure. 
-              Nous vous recontacterons sous 24h.
+              Choisissez visuellement vos options et passez votre commande de couture sur mesure.
             </p>
           </div>
         </div>
 
         <div className="container mx-auto px-4">
           <form onSubmit={handleSubmit} className="max-w-4xl mx-auto space-y-8">
-            {/* Informations personnelles */}
+            {/* Infos */}
             <Card>
-              <CardHeader>
-                <CardTitle className="font-playfair text-elegant-800">Vos Informations</CardTitle>
-              </CardHeader>
+              <CardHeader><CardTitle className="font-playfair text-elegant-800">Vos Informations</CardTitle></CardHeader>
               <CardContent className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <Label>Nom complet *</Label>
-                  <Input required value={form.client_name} onChange={e => update("client_name", e.target.value)} placeholder="Votre nom complet" />
+                  <Input required value={form.client_name} onChange={e => update("client_name", e.target.value)} placeholder="Votre nom" />
                 </div>
                 <div>
                   <Label>Email *</Label>
@@ -176,74 +237,47 @@ const Commander = () => {
               </CardContent>
             </Card>
 
-            {/* Type de vêtement */}
+            {/* Genre - Visual */}
             <Card>
-              <CardHeader>
-                <CardTitle className="font-playfair text-elegant-800">Le Vêtement</CardTitle>
-              </CardHeader>
-              <CardContent className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <Label>Genre *</Label>
-                  <Select value={form.gender} onValueChange={v => { update("gender", v); update("garment_category", ""); }}>
-                    <SelectTrigger><SelectValue placeholder="Sélectionner" /></SelectTrigger>
-                    <SelectContent>
-                      {genderOptions.map(g => <SelectItem key={g} value={g}>{g}</SelectItem>)}
-                    </SelectContent>
-                  </Select>
+              <CardHeader><CardTitle className="font-playfair text-elegant-800">Genre & Vêtement</CardTitle></CardHeader>
+              <CardContent className="space-y-6">
+                <VisualSelector label="Genre" options={genderOptions} value={form.gender} onChange={v => { update("gender", v); update("garment_category", ""); }} required />
+                
+                {form.gender && (
+                  <VisualSelector label="Type de vêtement" options={garmentOpts} value={form.garment_category} onChange={v => update("garment_category", v)} required />
+                )}
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <Label>Catégorie / Description *</Label>
+                    <Input required value={form.garment_type} onChange={e => update("garment_type", e.target.value)} placeholder="Ex: Tenue de mariage, casual..." />
+                  </div>
+                  <div>
+                    <Label>Quantité</Label>
+                    <Input type="number" min={1} value={form.quantity} onChange={e => update("quantity", e.target.value)} />
+                  </div>
                 </div>
-                <div>
-                  <Label>Type de vêtement *</Label>
-                  <Select value={form.garment_category} onValueChange={v => update("garment_category", v)} disabled={!form.gender}>
-                    <SelectTrigger><SelectValue placeholder={form.gender ? "Choisir le type" : "Sélectionnez d'abord le genre"} /></SelectTrigger>
-                    <SelectContent>
-                      {currentGarments.map(g => <SelectItem key={g} value={g}>{g}</SelectItem>)}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <Label>Catégorie *</Label>
-                  <Input required value={form.garment_type} onChange={e => update("garment_type", e.target.value)} placeholder="Ex: Tenue de mariage, casual..." />
-                </div>
-                <div>
-                  <Label>Quantité</Label>
-                  <Input type="number" min={1} value={form.quantity} onChange={e => update("quantity", e.target.value)} />
-                </div>
-                <div>
-                  <Label>Occasion</Label>
-                  <Select value={form.occasion} onValueChange={v => update("occasion", v)}>
-                    <SelectTrigger><SelectValue placeholder="Sélectionner l'occasion" /></SelectTrigger>
-                    <SelectContent>
-                      {occasionOptions.map(o => <SelectItem key={o} value={o}>{o}</SelectItem>)}
-                    </SelectContent>
-                  </Select>
-                </div>
+
+                <VisualSelector
+                  label="Occasion"
+                  options={occasionOptions.map(o => ({ value: o, label: o }))}
+                  value={form.occasion}
+                  onChange={v => update("occasion", v)}
+                />
               </CardContent>
             </Card>
 
-            {/* Tissus */}
+            {/* Tissus - Visual */}
             <Card>
-              <CardHeader>
-                <CardTitle className="font-playfair text-elegant-800">Choix du Tissu</CardTitle>
-              </CardHeader>
-              <CardContent className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <Label>Type de tissu *</Label>
-                  <Select value={form.fabric_type} onValueChange={v => update("fabric_type", v)}>
-                    <SelectTrigger><SelectValue placeholder="Choisir le tissu" /></SelectTrigger>
-                    <SelectContent>
-                      {fabricTypes.map(f => <SelectItem key={f} value={f}>{f}</SelectItem>)}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <Label>Pagne traditionnel (optionnel)</Label>
-                  <Select value={form.ethnic_fabric} onValueChange={v => update("ethnic_fabric", v)}>
-                    <SelectTrigger><SelectValue placeholder="Tissu ethnique" /></SelectTrigger>
-                    <SelectContent>
-                      {ethnicFabrics.map(f => <SelectItem key={f} value={f}>{f}</SelectItem>)}
-                    </SelectContent>
-                  </Select>
-                </div>
+              <CardHeader><CardTitle className="font-playfair text-elegant-800">Choix du Tissu</CardTitle></CardHeader>
+              <CardContent className="space-y-6">
+                <VisualSelector label="Type de tissu" options={fabricOptions} value={form.fabric_type} onChange={v => update("fabric_type", v)} required />
+                <VisualSelector
+                  label="Pagne traditionnel (optionnel)"
+                  options={ethnicFabrics.map(f => ({ value: f, label: f }))}
+                  value={form.ethnic_fabric}
+                  onChange={v => update("ethnic_fabric", v)}
+                />
               </CardContent>
             </Card>
 
@@ -251,54 +285,75 @@ const Commander = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="font-playfair text-elegant-800 flex items-center gap-2">
-                  <Ruler className="w-5 h-5" /> Vos Mesures (en cm) — Optionnel
+                  <Ruler className="w-5 h-5" /> Vos Mesures (cm) — Optionnel
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Si vous ne connaissez pas vos mesures, nous organiserons un rendez-vous de prise de mesures.
+                  Si vous ne connaissez pas vos mesures, nous organiserons un rendez-vous.
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                  <div>
-                    <Label>Tour de poitrine</Label>
-                    <Input type="number" value={form.tour_poitrine} onChange={e => update("tour_poitrine", e.target.value)} placeholder="cm" />
-                  </div>
-                  <div>
-                    <Label>Tour de taille</Label>
-                    <Input type="number" value={form.tour_taille} onChange={e => update("tour_taille", e.target.value)} placeholder="cm" />
-                  </div>
-                  <div>
-                    <Label>Tour de hanches</Label>
-                    <Input type="number" value={form.tour_hanches} onChange={e => update("tour_hanches", e.target.value)} placeholder="cm" />
-                  </div>
-                  <div>
-                    <Label>Longueur</Label>
-                    <Input type="number" value={form.longueur} onChange={e => update("longueur", e.target.value)} placeholder="cm" />
-                  </div>
-                  <div>
-                    <Label>Tour de bras</Label>
-                    <Input type="number" value={form.tour_bras} onChange={e => update("tour_bras", e.target.value)} placeholder="cm" />
-                  </div>
-                  <div>
-                    <Label>Épaules</Label>
-                    <Input type="number" value={form.epaules} onChange={e => update("epaules", e.target.value)} placeholder="cm" />
-                  </div>
+                  {[
+                    { key: "tour_poitrine", label: "Tour de poitrine" },
+                    { key: "tour_taille", label: "Tour de taille" },
+                    { key: "tour_hanches", label: "Tour de hanches" },
+                    { key: "longueur", label: "Longueur" },
+                    { key: "tour_bras", label: "Tour de bras" },
+                    { key: "epaules", label: "Épaules" },
+                  ].map(m => (
+                    <div key={m.key}>
+                      <Label>{m.label}</Label>
+                      <Input type="number" value={(form as any)[m.key]} onChange={e => update(m.key, e.target.value)} placeholder="cm" />
+                    </div>
+                  ))}
                 </div>
+              </CardContent>
+            </Card>
+
+            {/* Paiement Mobile Money */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="font-playfair text-elegant-800 flex items-center gap-2">
+                  <Smartphone className="w-5 h-5" /> Mode de Paiement
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {paymentMethods.map(pm => (
+                    <button
+                      key={pm.value}
+                      type="button"
+                      onClick={() => update("payment_method", pm.value)}
+                      className={`rounded-xl border-2 p-4 text-center transition-all ${
+                        form.payment_method === pm.value
+                          ? "border-elegant-600 ring-2 ring-elegant-300 shadow-lg"
+                          : "border-border hover:border-elegant-300"
+                      }`}
+                    >
+                      <div className={`w-10 h-10 ${pm.color} rounded-full mx-auto mb-2 flex items-center justify-center`}>
+                        {pm.value === "sur_place" ? (
+                          <CreditCard className="w-5 h-5 text-white" />
+                        ) : (
+                          <Smartphone className="w-5 h-5 text-white" />
+                        )}
+                      </div>
+                      <span className="text-xs font-medium text-foreground">{pm.label}</span>
+                    </button>
+                  ))}
+                </div>
+                {form.payment_method && form.payment_method !== "sur_place" && (
+                  <p className="mt-4 text-sm text-muted-foreground bg-muted p-3 rounded-lg">
+                    📱 Un lien de paiement {paymentMethods.find(p => p.value === form.payment_method)?.label} vous sera envoyé par SMS/WhatsApp après confirmation de votre commande.
+                  </p>
+                )}
               </CardContent>
             </Card>
 
             {/* Notes */}
             <Card>
-              <CardHeader>
-                <CardTitle className="font-playfair text-elegant-800">Notes & Précisions</CardTitle>
-              </CardHeader>
+              <CardHeader><CardTitle className="font-playfair text-elegant-800">Notes & Précisions</CardTitle></CardHeader>
               <CardContent>
-                <Textarea
-                  rows={4}
-                  value={form.notes}
-                  onChange={e => update("notes", e.target.value)}
-                  placeholder="Décrivez vos souhaits : couleurs, motifs, style, références d'images..."
-                />
+                <Textarea rows={4} value={form.notes} onChange={e => update("notes", e.target.value)} placeholder="Décrivez vos souhaits : couleurs, motifs, style..." />
               </CardContent>
             </Card>
 

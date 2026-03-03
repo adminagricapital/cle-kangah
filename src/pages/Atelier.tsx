@@ -14,6 +14,11 @@ import atelierMesures from "@/assets/atelier-mesures.jpg";
 import atelierCouture from "@/assets/atelier-couture.jpg";
 import atelierFashion from "@/assets/atelier-fashion.jpg";
 import atelierBoutique from "@/assets/atelier-boutique.jpg";
+import atelierEquipe from "@/assets/atelier-equipe-action.jpg";
+import fashionShow from "@/assets/fashion-show.jpg";
+import choristes from "@/assets/choristes.jpg";
+import collectionHomme from "@/assets/collection-homme.jpg";
+import collectionEnfants from "@/assets/collection-enfants.jpg";
 
 const stats = [
   { icon: Users, value: "30+", label: "Employés & Apprenants" },
@@ -135,10 +140,12 @@ const Atelier = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
+              { src: atelierEquipe, title: "Notre équipe en action", desc: "30+ artisans travaillant ensemble" },
               { src: atelierMesures, title: "Prise de mesures", desc: "Précision et attention aux détails" },
-              { src: atelierCouture, title: "Couture artisanale", desc: "Travail minutieux sur chaque pièce" },
-              { src: atelierFashion, title: "Créations fashion", desc: "Du traditionnel au contemporain" },
-              { src: atelierBoutique, title: "Boutique prêt-à-porter", desc: "Collections uniques disponibles" },
+              { src: fashionShow, title: "Défilé de mode", desc: "Nos créations sur les podiums" },
+              { src: collectionHomme, title: "Collection Homme", desc: "Costumes et tenues traditionnelles" },
+              { src: choristes, title: "Habillement de choristes", desc: "Tenues de groupe assorties" },
+              { src: collectionEnfants, title: "Collection Enfants", desc: "Tenues festives et colorées" },
             ].map((img, i) => (
               <div key={i} className={`group relative rounded-2xl overflow-hidden shadow-lg ${i === 0 ? 'lg:col-span-2 lg:row-span-2' : ''}`}>
                 <img src={img.src} alt={img.title} className="w-full h-full object-cover min-h-[250px] group-hover:scale-105 transition-transform duration-500" />

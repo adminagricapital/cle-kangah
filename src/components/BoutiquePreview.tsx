@@ -13,7 +13,7 @@ const BoutiquePreview = () => {
             {/* Text */}
             <div className="order-2 lg:order-1">
               <h2 className="text-3xl md:text-5xl font-playfair font-bold text-elegant-800 mb-4">
-                Commander en Ligne
+                Notre Boutique
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-elegant-400 to-rose-400 mb-6" />
               <p className="text-muted-foreground text-lg mb-6">
@@ -34,11 +34,18 @@ const BoutiquePreview = () => {
                   Livraison sous 7 jours — Garantie 100% satisfait
                 </li>
               </ul>
-              <Link to="/commander">
-                <Button size="lg" className="bg-elegant-600 hover:bg-elegant-700 text-white">
-                  <ShoppingBag className="w-5 h-5 mr-2" /> Commander maintenant <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link to="/boutique">
+                  <Button size="lg" className="bg-elegant-600 hover:bg-elegant-700 text-white">
+                    <ShoppingBag className="w-5 h-5 mr-2" /> Voir la boutique <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+                <Link to="/commander">
+                  <Button size="lg" variant="outline" className="border-elegant-300 text-elegant-700">
+                    Commander sur mesure
+                  </Button>
+                </Link>
+              </div>
             </div>
 
             {/* Image */}
