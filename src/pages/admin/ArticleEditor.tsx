@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-import { Sparkles, Save, ArrowLeft, Image as ImageIcon, Loader2 } from "lucide-react";
+import { Sparkles, Save, ArrowLeft, Image as ImageIcon, Images, FileText, Loader2, X } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription
@@ -37,6 +37,7 @@ const ArticleEditor = () => {
     tags: [] as string[], hashtags: [] as string[],
     meta_description: "", slug: "", featured_image: "", status: "draft",
   });
+  const [galleryImages, setGalleryImages] = useState<string[]>([]);
   const [rawInput, setRawInput] = useState("");
   const [generating, setGenerating] = useState(false);
   const [showGenDialog, setShowGenDialog] = useState(false);
@@ -64,7 +65,7 @@ const ArticleEditor = () => {
     }
   }, [id, isNew]);
 
-  const handleGenerate = async (withImage: boolean) => {
+  const handleGenerate = async (mediaOption: string) => {
     setShowGenDialog(false);
     setGenerating(true);
     try {
@@ -82,7 +83,7 @@ const ArticleEditor = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
           },
-          body: JSON.stringify({ text, withImage }),
+          body: JSON.stringify({ text, mediaOption }),
         }
       );
 
@@ -105,7 +106,11 @@ const ArticleEditor = () => {
         featured_image: data.generated_image || form.featured_image,
       });
 
-      toast({ title: "Contenu généré !", description: "L'IA a rempli tous les champs" });
+      if (data.generated_images?.length > 1) {
+        setGalleryImages(data.generated_images.slice(1));
+      }
+
+      toast({ title: "✨ Contenu généré !", description: "L'IA a rempli tous les champs automatiquement" });
     } catch (e: any) {
       toast({ title: "Erreur", description: e.message, variant: "destructive" });
     } finally {
@@ -141,8 +146,9 @@ const ArticleEditor = () => {
   };
 
   return (
-    <div className="p-8 max-w-5xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
+    <div className="p-4 md:p-8 max-w-5xl mx-auto">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="icon" onClick={() => navigate("/admin/articles")}>
             <ArrowLeft className="w-5 h-5" />
@@ -151,14 +157,14 @@ const ArticleEditor = () => {
             {isNew ? "Nouvel article" : "Modifier l'article"}
           </h1>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           <Button variant="outline" onClick={() => setPreview(!preview)}>
             {preview ? "Éditer" : "Aperçu"}
           </Button>
           <Button variant="outline" onClick={() => handleSave(false)} disabled={saving}>
             <Save className="w-4 h-4 mr-2" /> Brouillon
           </Button>
-          <Button className="bg-green-600 hover:bg-green-700" onClick={() => handleSave(true)} disabled={saving}>
+          <Button className="bg-green-600 hover:bg-green-700 text-white" onClick={() => handleSave(true)} disabled={saving}>
             {saving ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
             Publier
           </Button>
@@ -167,18 +173,27 @@ const ArticleEditor = () => {
 
       {preview ? (
         <Card>
-          <CardContent className="p-8 prose prose-lg max-w-none">
-            <h1 className="font-bold uppercase">{form.title}</h1>
-            {form.summary && <p className="italic text-muted-foreground">{form.summary}</p>}
-            {form.featured_image && (
-              <img src={form.featured_image} alt={form.title} className="w-full rounded-lg mb-6 max-h-96 object-cover" />
-            )}
-            <ReactMarkdown>{form.content}</ReactMarkdown>
-            {form.hashtags.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-6">
-                {form.hashtags.map((h, i) => <Badge key={i} variant="outline">{h}</Badge>)}
-              </div>
-            )}
+          <CardContent className="p-6 md:p-10">
+            <article className="prose prose-lg max-w-none prose-headings:font-playfair prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-table:border prose-th:bg-elegant-600 prose-th:text-white prose-th:p-3 prose-td:p-3 prose-td:border prose-tr:even:bg-muted/30">
+              <h1 className="font-bold uppercase text-foreground">{form.title}</h1>
+              {form.summary && <p className="italic text-muted-foreground text-lg border-l-4 border-elegant-400 pl-4">{form.summary}</p>}
+              {form.featured_image && (
+                <img src={form.featured_image} alt={form.title} className="w-full rounded-lg mb-6 max-h-[500px] object-cover" />
+              )}
+              <ReactMarkdown>{form.content}</ReactMarkdown>
+              {galleryImages.length > 0 && (
+                <div className="grid grid-cols-2 gap-4 mt-6">
+                  {galleryImages.map((img, i) => (
+                    <img key={i} src={img} alt={`Image ${i + 2}`} className="w-full rounded-lg object-cover h-48" />
+                  ))}
+                </div>
+              )}
+              {form.hashtags.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-6 not-prose">
+                  {form.hashtags.map((h, i) => <Badge key={i} variant="outline">{h}</Badge>)}
+                </div>
+              )}
+            </article>
           </CardContent>
         </Card>
       ) : (
@@ -189,9 +204,13 @@ const ArticleEditor = () => {
               <div className="flex items-center gap-3 mb-4">
                 <Sparkles className="w-5 h-5 text-elegant-600" />
                 <h3 className="font-semibold text-foreground">Génération par IA</h3>
+                <Badge variant="outline" className="text-xs">Premium</Badge>
               </div>
+              <p className="text-sm text-muted-foreground mb-3">
+                Écrivez un mot, une phrase ou un paragraphe — l'IA génère un article complet, structuré et illustré.
+              </p>
               <Textarea
-                placeholder="Écrivez un mot, une phrase ou un paragraphe... L'IA fera le reste !"
+                placeholder="Écrivez n'importe quoi : un mot, une idée, un thème... L'IA fera le reste !"
                 value={rawInput}
                 onChange={(e) => setRawInput(e.target.value)}
                 rows={3}
@@ -200,10 +219,10 @@ const ArticleEditor = () => {
               <Button
                 onClick={() => setShowGenDialog(true)}
                 disabled={generating}
-                className="bg-elegant-600 hover:bg-elegant-700"
+                className="bg-elegant-600 hover:bg-elegant-700 text-white"
               >
                 {generating ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Sparkles className="w-4 h-4 mr-2" />}
-                {generating ? "Génération en cours..." : "Générer"}
+                {generating ? "Génération en cours..." : "Générer le contenu"}
               </Button>
             </CardContent>
           </Card>
@@ -213,11 +232,11 @@ const ArticleEditor = () => {
             <div className="lg:col-span-2 space-y-4">
               <div>
                 <label className="text-sm font-medium mb-1.5 block">Titre</label>
-                <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="Titre de l'article" />
+                <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="Titre de l'article" className="font-bold uppercase" />
               </div>
               <div>
                 <label className="text-sm font-medium mb-1.5 block">Résumé</label>
-                <Input value={form.summary} onChange={(e) => setForm({ ...form, summary: e.target.value })} placeholder="Phrase d'accroche" />
+                <Input value={form.summary} onChange={(e) => setForm({ ...form, summary: e.target.value })} placeholder="Phrase d'accroche" className="italic" />
               </div>
               <div>
                 <label className="text-sm font-medium mb-1.5 block">Contenu (Markdown)</label>
@@ -258,7 +277,7 @@ const ArticleEditor = () => {
                     <Textarea value={form.meta_description} onChange={(e) => setForm({ ...form, meta_description: e.target.value })} rows={2} />
                   </div>
                   <div>
-                    <label className="text-xs font-medium mb-1 block">Tags (séparés par des virgules)</label>
+                    <label className="text-xs font-medium mb-1 block">Tags (virgules)</label>
                     <Input
                       value={form.tags.join(", ")}
                       onChange={(e) => setForm({ ...form, tags: e.target.value.split(",").map(t => t.trim()).filter(Boolean) })}
@@ -274,16 +293,41 @@ const ArticleEditor = () => {
                 </CardContent>
               </Card>
 
+              {/* Featured image */}
               {form.featured_image && (
                 <Card>
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-sm">Image</CardTitle>
+                    <CardTitle className="text-sm">Image principale</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <img src={form.featured_image} alt="Featured" className="w-full rounded-lg" />
                     <Button variant="outline" size="sm" className="mt-2 w-full" onClick={() => setForm({ ...form, featured_image: "" })}>
                       Supprimer l'image
                     </Button>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Gallery images */}
+              {galleryImages.length > 0 && (
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-sm">Galerie ({galleryImages.length})</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    {galleryImages.map((img, i) => (
+                      <div key={i} className="relative">
+                        <img src={img} alt={`Gallery ${i + 1}`} className="w-full rounded-lg h-32 object-cover" />
+                        <Button
+                          variant="destructive"
+                          size="icon"
+                          className="absolute top-1 right-1 h-6 w-6"
+                          onClick={() => setGalleryImages(galleryImages.filter((_, idx) => idx !== i))}
+                        >
+                          <X className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    ))}
                   </CardContent>
                 </Card>
               )}
@@ -294,17 +338,20 @@ const ArticleEditor = () => {
 
       {/* Generation Dialog */}
       <Dialog open={showGenDialog} onOpenChange={setShowGenDialog}>
-        <DialogContent>
+        <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="font-playfair">Générer le contenu</DialogTitle>
-            <DialogDescription>Choisissez le type de génération</DialogDescription>
+            <DialogDescription>Choisissez le type de média à inclure</DialogDescription>
           </DialogHeader>
           <div className="space-y-3 pt-4">
-            <Button className="w-full bg-elegant-600 hover:bg-elegant-700" onClick={() => handleGenerate(true)}>
-              <ImageIcon className="w-4 h-4 mr-2" /> Avec image générée par IA
+            <Button className="w-full bg-elegant-600 hover:bg-elegant-700 text-white justify-start" onClick={() => handleGenerate("with-image")}>
+              <ImageIcon className="w-4 h-4 mr-3" /> Avec une image IA
             </Button>
-            <Button variant="outline" className="w-full" onClick={() => handleGenerate(false)}>
-              <Sparkles className="w-4 h-4 mr-2" /> Sans image
+            <Button className="w-full bg-elegant-700 hover:bg-elegant-800 text-white justify-start" onClick={() => handleGenerate("with-multiple-images")}>
+              <Images className="w-4 h-4 mr-3" /> Avec plusieurs images IA
+            </Button>
+            <Button variant="outline" className="w-full justify-start" onClick={() => handleGenerate("without-image")}>
+              <FileText className="w-4 h-4 mr-3" /> Sans image
             </Button>
           </div>
         </DialogContent>
