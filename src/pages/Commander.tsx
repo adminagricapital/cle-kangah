@@ -9,14 +9,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Scissors, CheckCircle, Loader2, Ruler, CreditCard, Smartphone } from "lucide-react";
-import collectionHomme from "@/assets/collection-homme.jpg";
-import collectionEnfants from "@/assets/collection-enfants.jpg";
-import journeeFemme from "@/assets/journee-femme.jpg";
-import tissus from "@/assets/tissus-varietes.jpg";
-import robeSoiree from "@/assets/robe-soiree-rouge.jpg";
-import fashionShow from "@/assets/fashion-show.jpg";
-import choristes from "@/assets/choristes.jpg";
-import tenuePro from "@/assets/tenue-professionnelle.jpg";
+import {
+  genderOptions, garmentImages, garmentCategories, fabricOptions,
+  ethnicFabrics, occasionOptions, paymentMethods
+} from "@/data/commander-options";
 
 // Visual selector component
 const VisualSelector = ({ label, options, value, onChange, required }: {
@@ -58,72 +54,6 @@ const VisualSelector = ({ label, options, value, onChange, required }: {
     </div>
   </div>
 );
-
-const genderOptions = [
-  { value: "Femme", label: "Femme", image: journeeFemme },
-  { value: "Homme", label: "Homme", image: collectionHomme },
-  { value: "Enfant", label: "Enfant", image: collectionEnfants },
-];
-
-const garmentImages: Record<string, string> = {
-  "Robe de soirée": robeSoiree, "Robe longue": robeSoiree, "Robe courte": journeeFemme,
-  "Costume complet": collectionHomme, "Veste": tenuePro, "Pantalon": collectionHomme,
-  "Tenue de cérémonie": fashionShow, "Tenue de choriste": choristes,
-  "Tenue professionnelle": tenuePro, "Robe fille": collectionEnfants,
-};
-
-const garmentCategories: Record<string, string[]> = {
-  Femme: [
-    "Robe longue", "Robe courte", "Robe de soirée", "Robe de mariée",
-    "Jupe maxi", "Jupe midi", "Jupe crayon", "Jupe patineuse",
-    "Ensemble tailleur", "Blouse", "Chemisier", "Pantalon", "Combinaison",
-    "Boubou", "Caftan", "Pagne noué", "Corsage", "Tunique",
-    "Tenue de cérémonie", "Tenue de choriste",
-  ],
-  Homme: [
-    "Costume complet", "Veste", "Pantalon", "Chemise", "Polo",
-    "Gilet", "Boubou", "Caftan", "Dashiki", "Agbada",
-    "Tenue traditionnelle", "Tenue de cérémonie", "Tenue professionnelle",
-  ],
-  Enfant: [
-    "Robe fille", "Ensemble garçon", "Tenue de baptême", "Tenue scolaire",
-    "Tenue de fête", "Mini boubou", "Ensemble casual",
-  ],
-};
-
-const fabricOptions = [
-  { value: "Wax (pagne imprimé)", label: "Wax", image: tissus },
-  { value: "Bazin riche", label: "Bazin riche", image: tissus },
-  { value: "Soie", label: "Soie" }, { value: "Satin", label: "Satin" },
-  { value: "Dentelle", label: "Dentelle" }, { value: "Mousseline", label: "Mousseline" },
-  { value: "Lin", label: "Lin" }, { value: "Coton uni", label: "Coton" },
-  { value: "Velours", label: "Velours" }, { value: "Brocart", label: "Brocart" },
-  { value: "Organza", label: "Organza" }, { value: "Crêpe", label: "Crêpe" },
-  { value: "Gabardine", label: "Gabardine" }, { value: "Jean/Denim", label: "Denim" },
-  { value: "Kente", label: "Kente" }, { value: "Bogolan", label: "Bogolan" },
-];
-
-const ethnicFabrics = [
-  "Pagne Baoulé (Kita)", "Pagne Sénoufo", "Pagne Dan / Yacouba",
-  "Pagne Gouro", "Pagne Bété", "Pagne Dida", "Pagne Agni",
-  "Pagne Dioula (Korhogo)", "Pagne Wê / Guéré", "Pagne Malinké",
-  "Pagne Adjoukrou", "Pagne Abbey", "Pagne Lobi",
-  "Faso Dan Fani (Burkina)", "Kente (Ghana/Akan)", "Aucun / Autre",
-];
-
-const occasionOptions = [
-  "Mariage", "Baptême", "Anniversaire", "Saint-Valentin", "8 Mars",
-  "Cérémonie officielle", "Défilé de mode", "Concours de beauté",
-  "Fête religieuse", "Événement professionnel", "Sortie/Soirée",
-  "Tenue quotidienne", "Autre",
-];
-
-const paymentMethods = [
-  { value: "orange_money", label: "Orange Money", color: "bg-orange-500" },
-  { value: "wave", label: "Wave", color: "bg-blue-500" },
-  { value: "mtn_money", label: "MTN Money", color: "bg-yellow-500" },
-  { value: "sur_place", label: "Paiement sur place", color: "bg-elegant-500" },
-];
 
 const Commander = () => {
   const { toast } = useToast();
@@ -260,7 +190,7 @@ const Commander = () => {
 
                 <VisualSelector
                   label="Occasion"
-                  options={occasionOptions.map(o => ({ value: o, label: o }))}
+                  options={occasionOptions}
                   value={form.occasion}
                   onChange={v => update("occasion", v)}
                 />
@@ -274,7 +204,7 @@ const Commander = () => {
                 <VisualSelector label="Type de tissu" options={fabricOptions} value={form.fabric_type} onChange={v => update("fabric_type", v)} required />
                 <VisualSelector
                   label="Pagne traditionnel (optionnel)"
-                  options={ethnicFabrics.map(f => ({ value: f, label: f }))}
+                  options={ethnicFabrics}
                   value={form.ethnic_fabric}
                   onChange={v => update("ethnic_fabric", v)}
                 />
