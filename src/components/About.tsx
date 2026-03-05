@@ -21,24 +21,27 @@ const About = () => {
             {/* Text Content */}
             <div className="space-y-6">
               <p className="text-lg leading-relaxed text-gray-700">
-                Je suis née avec des aiguilles entre les mains, mais mon rêve va bien au-delà du tissu. 
-                Je m'appelle <span className="font-semibold text-elegant-700">Clémence KANGAH</span>. 
-                Mon parcours est fait de couture, de transmission, de leadership féminin et de foi.
+                Je n'ai pas eu la chance de suivre le chemin classique de l'école. Ma véritable école a été la vie, et très tôt, la couture est devenue mon premier langage d'expression.
               </p>
               
               <p className="text-lg leading-relaxed text-gray-700">
-                Formée dans la couture traditionnelle et contemporaine, j'ai élargi ma mission vers 
-                l'accompagnement social, la formation, la gestion de projets communautaires et l'écriture.
+                Aiguille après aiguille, fil après fil, j'ai appris à transformer un simple tissu en création, mais aussi les défis de la vie en force et en vision. Ce métier, commencé très jeune, est devenu au fil du temps bien plus qu'un savoir-faire : un chemin de création, de transmission et d'engagement.
               </p>
               
               <p className="text-lg leading-relaxed text-gray-700">
-                Chaque action que je pose est guidée par un fil invisible : la volonté de guérir, 
-                de construire, d'éveiller.
+                Je m'appelle <span className="font-semibold text-elegant-700">Clémence KANGAH</span>. Mon parcours se situe au croisement de la couture, du leadership féminin, du partage du savoir et d'une foi profonde qui guide chacune de mes actions.
+              </p>
+              
+              <p className="text-lg leading-relaxed text-gray-700">
+                Formée à la couture traditionnelle et contemporaine, j'ai progressivement élargi mon engagement vers la formation, l'accompagnement social, la gestion de projets communautaires et l'écriture.
+              </p>
+
+              <p className="text-lg leading-relaxed text-gray-700">
+                Chaque action que je mène est guidée par un fil invisible : celui de guérir, de construire et d'éveiller.
               </p>
               
               <p className="text-lg leading-relaxed text-elegant-700 font-semibold">
-                Aujourd'hui, je m'engage à bâtir, à tisser des ponts entre les âmes, à laisser une 
-                trace utile, féminine et durable.
+                Aujourd'hui, ma mission est de tisser des ponts entre les femmes, les communautés et les générations, afin de laisser une empreinte utile, féminine et durable.
               </p>
             </div>
 
