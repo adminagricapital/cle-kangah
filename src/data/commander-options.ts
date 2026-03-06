@@ -52,7 +52,22 @@ import fabricGabardine from "@/assets/fabric-gabardine.jpg";
 import fabricDenim from "@/assets/fabric-denim.jpg";
 import fabricKente from "@/assets/fabric-kente.jpg";
 import fabricBogolan from "@/assets/fabric-bogolan.jpg";
-import tissus from "@/assets/tissus-varietes.jpg";
+
+// Ethnic fabric images by culture
+import ethnicBaoule from "@/assets/ethnic-baoule-kita.jpg";
+import ethnicSenoufo from "@/assets/ethnic-senoufo.jpg";
+import ethnicDan from "@/assets/ethnic-dan-yacouba.jpg";
+import ethnicGouro from "@/assets/ethnic-gouro.jpg";
+import ethnicBete from "@/assets/ethnic-bete.jpg";
+import ethnicDida from "@/assets/ethnic-dida.jpg";
+import ethnicAgni from "@/assets/ethnic-agni.jpg";
+import ethnicDioula from "@/assets/ethnic-dioula-korhogo.jpg";
+import ethnicWeGuere from "@/assets/ethnic-we-guere.jpg";
+import ethnicMalinke from "@/assets/ethnic-malinke.jpg";
+import ethnicAdjoukrou from "@/assets/ethnic-adjoukrou.jpg";
+import ethnicAbbey from "@/assets/ethnic-abbey.jpg";
+import ethnicLobi from "@/assets/ethnic-lobi.jpg";
+import ethnicFasoDanFani from "@/assets/ethnic-faso-dan-fani.jpg";
 
 // Occasion images
 import occasionMariage from "@/assets/occasion-mariage.jpg";
@@ -67,7 +82,6 @@ import occasionReligieuse from "@/assets/occasion-religieuse.jpg";
 import occasionProfessionnel from "@/assets/occasion-professionnel.jpg";
 import occasionSoiree from "@/assets/occasion-soiree.jpg";
 import occasionQuotidien from "@/assets/occasion-quotidien.jpg";
-import saintValentin from "@/assets/saint-valentin.jpg";
 
 export const genderOptions = [
   { value: "Femme", label: "Femme", image: journeeFemme },
@@ -153,20 +167,20 @@ export const fabricOptions = [
 ];
 
 export const ethnicFabrics = [
-  { value: "Pagne Baoulé (Kita)", label: "Baoulé (Kita)", image: fabricWax },
-  { value: "Pagne Sénoufo", label: "Sénoufo", image: fabricBogolan },
-  { value: "Pagne Dan / Yacouba", label: "Dan / Yacouba", image: tissus },
-  { value: "Pagne Gouro", label: "Gouro", image: fabricKente },
-  { value: "Pagne Bété", label: "Bété", image: tissus },
-  { value: "Pagne Dida", label: "Dida", image: fabricWax },
-  { value: "Pagne Agni", label: "Agni", image: fabricBazin },
-  { value: "Pagne Dioula (Korhogo)", label: "Dioula (Korhogo)", image: fabricBogolan },
-  { value: "Pagne Wê / Guéré", label: "Wê / Guéré", image: tissus },
-  { value: "Pagne Malinké", label: "Malinké", image: fabricKente },
-  { value: "Pagne Adjoukrou", label: "Adjoukrou", image: fabricWax },
-  { value: "Pagne Abbey", label: "Abbey", image: tissus },
-  { value: "Pagne Lobi", label: "Lobi", image: fabricBogolan },
-  { value: "Faso Dan Fani (Burkina)", label: "Faso Dan Fani", image: fabricKente },
+  { value: "Pagne Baoulé (Kita)", label: "Baoulé (Kita)", image: ethnicBaoule },
+  { value: "Pagne Sénoufo", label: "Sénoufo", image: ethnicSenoufo },
+  { value: "Pagne Dan / Yacouba", label: "Dan / Yacouba", image: ethnicDan },
+  { value: "Pagne Gouro", label: "Gouro", image: ethnicGouro },
+  { value: "Pagne Bété", label: "Bété", image: ethnicBete },
+  { value: "Pagne Dida", label: "Dida", image: ethnicDida },
+  { value: "Pagne Agni", label: "Agni", image: ethnicAgni },
+  { value: "Pagne Dioula (Korhogo)", label: "Dioula (Korhogo)", image: ethnicDioula },
+  { value: "Pagne Wê / Guéré", label: "Wê / Guéré", image: ethnicWeGuere },
+  { value: "Pagne Malinké", label: "Malinké", image: ethnicMalinke },
+  { value: "Pagne Adjoukrou", label: "Adjoukrou", image: ethnicAdjoukrou },
+  { value: "Pagne Abbey", label: "Abbey", image: ethnicAbbey },
+  { value: "Pagne Lobi", label: "Lobi", image: ethnicLobi },
+  { value: "Faso Dan Fani (Burkina)", label: "Faso Dan Fani", image: ethnicFasoDanFani },
   { value: "Kente (Ghana/Akan)", label: "Kente (Ghana)", image: fabricKente },
   { value: "Aucun / Autre", label: "Aucun / Autre" },
 ];

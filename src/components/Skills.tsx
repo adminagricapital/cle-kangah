@@ -1,44 +1,44 @@
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Scissors, Palette, Users, Smartphone, BookOpen, MessageCircle } from 'lucide-react';
+import { Scissors, Palette, Users, Crown, BookOpen, Sparkles } from 'lucide-react';
 
 const Skills = () => {
   const skills = [
     {
       icon: Scissors,
       title: "Couture sur mesure",
-      description: "Modèles traditionnels et modernes",
+      description: "Dame, Homme, Enfants — robes, costumes, boubous, tenues de cérémonie",
       color: "text-elegant-600"
     },
     {
       icon: Palette,
-      title: "Création textile",
-      description: "Design d'identité visuelle",
+      title: "Stylisme & Modélisme",
+      description: "Création de modèles, design de motifs, conseils en image",
       color: "text-rose-600"
     },
     {
-      icon: Users,
-      title: "Coordination de projets",
-      description: "Projets agricoles et sociaux",
+      icon: Crown,
+      title: "Habillement événementiel",
+      description: "Mariages, défilés de mode, concours de beauté, chorales",
       color: "text-coral-600"
     },
     {
-      icon: Smartphone,
-      title: "Solutions digitales",
-      description: "BizControl, MoTiMô",
+      icon: Sparkles,
+      title: "Broderie & Finitions",
+      description: "Broderie traditionnelle, surfilage, retouches, pressing",
       color: "text-elegant-600"
     },
     {
       icon: BookOpen,
-      title: "Rédaction",
-      description: "Livres introspectifs, sociaux et spirituels",
+      title: "Écriture & Transmission",
+      description: "Livres introspectifs, spirituels et sociaux",
       color: "text-rose-600"
     },
     {
-      icon: MessageCircle,
-      title: "Animation",
-      description: "Groupes communautaires et ateliers",
+      icon: Users,
+      title: "Formation & Mentorat",
+      description: "Apprentissage couture, ateliers communautaires, leadership féminin",
       color: "text-coral-600"
     }
   ];
@@ -47,19 +47,17 @@ const Skills = () => {
     <section id="savoir-faire" className="py-20 bg-gradient-rose">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-playfair font-bold text-elegant-800 mb-6">
               Savoir-faire
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-elegant-400 to-rose-400 mx-auto mb-6"></div>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Ma force ? Transformer une idée en action, un besoin en solution, une blessure en victoire.
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              De l'aiguille à la plume, un savoir-faire complet au service de l'élégance et de la transmission
             </p>
           </div>
 
-          {/* Skills Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skills.map((skill, index) => {
               const IconComponent = skill.icon;
               return (
@@ -71,27 +69,16 @@ const Skills = () => {
                     <div className="mb-6">
                       <IconComponent className={`w-16 h-16 ${skill.color} mx-auto group-hover:scale-110 transition-transform duration-300`} />
                     </div>
-                    <h3 className="font-playfair font-semibold text-xl text-gray-800 mb-3">
+                    <h3 className="font-playfair font-semibold text-xl text-foreground mb-3">
                       {skill.title}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed">
+                    <p className="text-muted-foreground leading-relaxed">
                       {skill.description}
                     </p>
                   </CardContent>
                 </Card>
               );
             })}
-          </div>
-
-          {/* Quote */}
-          <div className="text-center">
-            <Card className="max-w-2xl mx-auto bg-white/90 backdrop-blur-sm border-0 shadow-lg">
-              <CardContent className="p-8">
-                <blockquote className="text-xl font-playfair font-medium text-elegant-800 italic leading-relaxed">
-                  "Ma force ? Transformer une idée en action, un besoin en solution, une blessure en victoire."
-                </blockquote>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </div>

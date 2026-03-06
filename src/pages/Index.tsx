@@ -3,13 +3,13 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
-import Skills from '@/components/Skills';
 import AtelierPreview from '@/components/AtelierPreview';
-import Projects from '@/components/Projects';
 import Gallery from '@/components/Gallery';
+import Skills from '@/components/Skills';
 import BoutiquePreview from '@/components/BoutiquePreview';
-import ValuFam from '@/components/ValuFam';
+import Projects from '@/components/Projects';
 import Testimonials from '@/components/Testimonials';
+import ValuFam from '@/components/ValuFam';
 import Contact from '@/components/Contact';
 import Newsletter from '@/components/Newsletter';
 import Footer from '@/components/Footer';
@@ -20,13 +20,13 @@ const Index = () => {
       <Navbar />
       <Hero />
       <About />
-      <Skills />
       <AtelierPreview />
-      <Projects />
       <Gallery />
       <BoutiquePreview />
-      <ValuFam />
+      <Skills />
+      <Projects />
       <Testimonials />
+      <ValuFam />
       <Contact />
       <Newsletter />
       <Footer />

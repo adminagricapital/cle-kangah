@@ -1,77 +1,48 @@
 
 import React from 'react';
 import { Card } from '@/components/ui/card';
+import robeSoiree from '@/assets/robe-soiree-rouge.jpg';
+import fashionShow from '@/assets/fashion-show.jpg';
+import choristes from '@/assets/choristes.jpg';
+import collectionHomme from '@/assets/collection-homme.jpg';
+import collectionEnfants from '@/assets/collection-enfants.jpg';
+import atelierEquipe from '@/assets/atelier-equipe-action.jpg';
+import tenuePro from '@/assets/tenue-professionnelle.jpg';
+import saintValentin from '@/assets/saint-valentin.jpg';
+import journeeFemme from '@/assets/journee-femme.jpg';
 
 const Gallery = () => {
   const galleryItems = [
-    {
-      src: "/lovable-uploads/13cde68b-dd54-400c-a5d5-5026d97be25f.png",
-      alt: "Clémence dans son atelier de couture",
-      category: "Atelier"
-    },
-    {
-      src: "/lovable-uploads/49d38ade-0757-4d81-8f11-59ea32e1eb40.png",
-      alt: "Robe africaine traditionnelle",
-      category: "Création"
-    },
-    {
-      src: "/lovable-uploads/1ec4f64b-7df4-431f-ad06-84c9514b9b63.png",
-      alt: "Tenue masculine élégante",
-      category: "Mode Homme"
-    },
-    {
-      src: "/lovable-uploads/64eae6be-7f6f-4eed-9c39-a9fd86f82625.png",
-      alt: "Ensemble traditionnel sur mannequin",
-      category: "Collection"
-    },
-    {
-      src: "/lovable-uploads/8ce7ab53-38fb-48f3-902a-a0605bd1a57e.png",
-      alt: "Tissus et catalogue de modèles",
-      category: "Inspiration"
-    },
-    {
-      src: "/lovable-uploads/90fe56aa-7a10-4972-9338-6799ce653bad.png",
-      alt: "Formation et transmission",
-      category: "Formation"
-    },
-    {
-      src: "/lovable-uploads/1422dda0-46e1-4688-8710-210a30812e0e.png",
-      alt: "Clémence en tenue décontractée",
-      category: "Portrait"
-    },
-    {
-      src: "/lovable-uploads/45860e4d-8943-431c-be8e-1f550853ad8d.png",
-      alt: "Création de masques et accessoires",
-      category: "Accessoires"
-    },
-    {
-      src: "/lovable-uploads/9c80126b-39f7-49cd-9ac4-4e9f36c7a3e5.png",
-      alt: "Projet agricole - plants de palmier",
-      category: "Agriculture"
-    }
+    { src: atelierEquipe, alt: "L'équipe CK Couture en pleine action", category: "Atelier" },
+    { src: fashionShow, alt: "Défilé de mode CK Couture", category: "Défilé" },
+    { src: robeSoiree, alt: "Robe de soirée élégante", category: "Création" },
+    { src: collectionHomme, alt: "Collection homme premium", category: "Homme" },
+    { src: choristes, alt: "Tenues de choristes assorties", category: "Groupe" },
+    { src: collectionEnfants, alt: "Collection enfants festive", category: "Enfants" },
+    { src: tenuePro, alt: "Tenue professionnelle sur mesure", category: "Professionnel" },
+    { src: saintValentin, alt: "Collection Saint-Valentin couple", category: "Événement" },
+    { src: journeeFemme, alt: "Collection femme tendance", category: "Femme" },
   ];
 
   return (
     <section id="galerie" className="py-12 md:py-20 bg-gradient-elegant">
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-elegant-800 mb-4 md:mb-6">
-              Galerie
+              Nos Réalisations
             </h2>
             <div className="w-20 md:w-24 h-1 bg-gradient-to-r from-elegant-400 to-rose-400 mx-auto mb-4 md:mb-6"></div>
-            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto px-4">
-              Un aperçu de mes réalisations, projets et moments marquants
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
+              Un aperçu de nos créations pour toutes les occasions et tous les styles
             </p>
           </div>
 
-          {/* Gallery Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {galleryItems.map((item, index) => (
               <Card 
                 key={index} 
-                className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 md:hover:-translate-y-2 border-0"
+                className={`group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 md:hover:-translate-y-2 border-0 ${index === 0 ? 'sm:col-span-2 lg:col-span-1' : ''}`}
               >
                 <div className="relative overflow-hidden">
                   <img 
