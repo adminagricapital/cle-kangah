@@ -1,45 +1,44 @@
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Scissors, Palette, Users, Crown, BookOpen, Sparkles } from 'lucide-react';
+import skillCouture from '@/assets/skill-couture-mesure.jpg';
+import skillStylisme from '@/assets/skill-stylisme.jpg';
+import skillEvenementiel from '@/assets/skill-evenementiel.jpg';
+import skillBroderie from '@/assets/skill-broderie.jpg';
+import skillEcriture from '@/assets/skill-ecriture.jpg';
+import skillFormation from '@/assets/skill-formation.jpg';
 
 const Skills = () => {
   const skills = [
     {
-      icon: Scissors,
+      image: skillCouture,
       title: "Couture sur mesure",
       description: "Dame, Homme, Enfants — robes, costumes, boubous, tenues de cérémonie",
-      color: "text-elegant-600"
     },
     {
-      icon: Palette,
+      image: skillStylisme,
       title: "Stylisme & Modélisme",
       description: "Création de modèles, design de motifs, conseils en image",
-      color: "text-rose-600"
     },
     {
-      icon: Crown,
+      image: skillEvenementiel,
       title: "Habillement événementiel",
       description: "Mariages, défilés de mode, concours de beauté, chorales",
-      color: "text-coral-600"
     },
     {
-      icon: Sparkles,
+      image: skillBroderie,
       title: "Broderie & Finitions",
       description: "Broderie traditionnelle, surfilage, retouches, pressing",
-      color: "text-elegant-600"
     },
     {
-      icon: BookOpen,
+      image: skillEcriture,
       title: "Écriture & Transmission",
       description: "Livres introspectifs, spirituels et sociaux",
-      color: "text-rose-600"
     },
     {
-      icon: Users,
+      image: skillFormation,
       title: "Formation & Mentorat",
       description: "Apprentissage couture, ateliers communautaires, leadership féminin",
-      color: "text-coral-600"
     }
   ];
 
@@ -58,27 +57,29 @@ const Skills = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {skills.map((skill, index) => {
-              const IconComponent = skill.icon;
-              return (
-                <Card 
-                  key={index} 
-                  className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white/80 backdrop-blur-sm border-0"
-                >
-                  <CardContent className="p-8 text-center">
-                    <div className="mb-6">
-                      <IconComponent className={`w-16 h-16 ${skill.color} mx-auto group-hover:scale-110 transition-transform duration-300`} />
-                    </div>
-                    <h3 className="font-playfair font-semibold text-xl text-foreground mb-3">
-                      {skill.title}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {skill.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              );
-            })}
+            {skills.map((skill, index) => (
+              <Card 
+                key={index} 
+                className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white/80 backdrop-blur-sm border-0 overflow-hidden"
+              >
+                <div className="relative h-52 overflow-hidden">
+                  <img 
+                    src={skill.image} 
+                    alt={skill.title} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                </div>
+                <CardContent className="p-6 text-center">
+                  <h3 className="font-playfair font-semibold text-xl text-foreground mb-3">
+                    {skill.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {skill.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </div>

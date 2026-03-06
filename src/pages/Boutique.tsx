@@ -9,16 +9,32 @@ import { ShoppingBag, ShoppingCart, ArrowRight, Star, Plus } from "lucide-react"
 import { Link } from "react-router-dom";
 import { useCart } from "@/hooks/useCart";
 import CartDrawer from "@/components/CartDrawer";
-import collectionHomme from "@/assets/collection-homme.jpg";
-import collectionEnfants from "@/assets/collection-enfants.jpg";
-import robeSoiree from "@/assets/robe-soiree-rouge.jpg";
-import fashionShow from "@/assets/fashion-show.jpg";
-import choristes from "@/assets/choristes.jpg";
-import tenuePro from "@/assets/tenue-professionnelle.jpg";
-import journeeFemme from "@/assets/journee-femme.jpg";
-import saintValentin from "@/assets/saint-valentin.jpg";
-import tissus from "@/assets/tissus-varietes.jpg";
-import atelierEquipe from "@/assets/atelier-equipe-action.jpg";
+
+// Boutique product images
+import boutiqueRobeSoiree from "@/assets/boutique-robe-soiree-rouge.jpg";
+import boutiqueCostumeHomme from "@/assets/boutique-costume-homme.jpg";
+import boutiqueEnsembleEnfants from "@/assets/boutique-ensemble-enfants.jpg";
+import boutiqueDefileFashion from "@/assets/boutique-defile-fashion.jpg";
+import boutiqueRobeChoriste from "@/assets/boutique-robe-choriste.jpg";
+import boutiqueTailleurPro from "@/assets/boutique-tailleur-pro.jpg";
+import boutique8Mars from "@/assets/boutique-8mars.jpg";
+import boutiqueSaintValentin from "@/assets/boutique-saint-valentin.jpg";
+import boutiqueTissusWax from "@/assets/boutique-tissus-wax.jpg";
+import boutiqueTenueGroupe from "@/assets/boutique-tenue-groupe.jpg";
+import boutiqueRobeMariee from "@/assets/boutique-robe-mariee.jpg";
+import boutiqueAgbadaRoyal from "@/assets/boutique-agbada-royal.jpg";
+import boutiqueBoubouFemme from "@/assets/boutique-boubou-femme.jpg";
+import boutiqueCaftanHomme from "@/assets/boutique-caftan-homme.jpg";
+import boutiqueTenueBapteme from "@/assets/boutique-tenue-bapteme.jpg";
+import boutiqueCombinaisonWax from "@/assets/boutique-combinaison-wax.jpg";
+import boutiqueJupeCrayon from "@/assets/boutique-jupe-crayon.jpg";
+import boutiqueDashikiModerne from "@/assets/boutique-dashiki-moderne.jpg";
+import boutiqueTissuKente from "@/assets/boutique-tissu-kente.jpg";
+import boutiqueRobeGala from "@/assets/boutique-robe-gala.jpg";
+import boutiqueUniformeScolaire from "@/assets/boutique-uniforme-scolaire.jpg";
+import boutiquePagneNoue from "@/assets/boutique-pagne-noue.jpg";
+import boutiqueTissuBazin from "@/assets/boutique-tissu-bazin.jpg";
+import boutiqueBlazerAfricain from "@/assets/boutique-blazer-africain.jpg";
 
 interface Product {
   id: string;
@@ -32,16 +48,30 @@ interface Product {
 }
 
 const products: Product[] = [
-  { id: "1", name: "Robe de Soirée Élégante", category: "femme", price: 45000, priceLabel: "45 000 FCFA", image: robeSoiree, badge: "Populaire", rating: 5 },
-  { id: "2", name: "Costume Homme Premium", category: "homme", price: 65000, priceLabel: "65 000 FCFA", image: collectionHomme, badge: "Nouveau", rating: 5 },
-  { id: "3", name: "Ensemble Enfants Festif", category: "enfants", price: 25000, priceLabel: "25 000 FCFA", image: collectionEnfants, rating: 4 },
-  { id: "4", name: "Tenue de Défilé Fashion", category: "femme", price: 85000, priceLabel: "85 000 FCFA", image: fashionShow, badge: "Exclusif", rating: 5 },
-  { id: "5", name: "Robe de Choriste Bordeaux", category: "femme", price: 35000, priceLabel: "35 000 FCFA", image: choristes, rating: 4 },
-  { id: "6", name: "Tailleur Professionnel", category: "homme", price: 55000, priceLabel: "55 000 FCFA", image: tenuePro, rating: 5 },
-  { id: "7", name: "Collection 8 Mars Femme Forte", category: "femme", price: 50000, priceLabel: "50 000 FCFA", image: journeeFemme, badge: "Tendance", rating: 5 },
-  { id: "8", name: "Duo Saint-Valentin Couple", category: "femme", price: 95000, priceLabel: "95 000 FCFA", image: saintValentin, badge: "Promo", rating: 5 },
-  { id: "9", name: "Tissus Wax Premium (6 yards)", category: "tissus", price: 15000, priceLabel: "15 000 FCFA", image: tissus, rating: 4 },
-  { id: "10", name: "Tenue de Groupe Assortie", category: "homme", price: 40000, priceLabel: "40 000 FCFA", image: atelierEquipe, rating: 4 },
+  { id: "1", name: "Robe de Soirée Élégante", category: "femme", price: 45000, priceLabel: "45 000 FCFA", image: boutiqueRobeSoiree, badge: "Populaire", rating: 5 },
+  { id: "2", name: "Costume Homme Premium", category: "homme", price: 65000, priceLabel: "65 000 FCFA", image: boutiqueCostumeHomme, badge: "Nouveau", rating: 5 },
+  { id: "3", name: "Ensemble Enfants Festif", category: "enfants", price: 25000, priceLabel: "25 000 FCFA", image: boutiqueEnsembleEnfants, rating: 4 },
+  { id: "4", name: "Tenue de Défilé Haute Couture", category: "femme", price: 85000, priceLabel: "85 000 FCFA", image: boutiqueDefileFashion, badge: "Exclusif", rating: 5 },
+  { id: "5", name: "Robe de Choriste Bordeaux & Or", category: "femme", price: 35000, priceLabel: "35 000 FCFA", image: boutiqueRobeChoriste, rating: 4 },
+  { id: "6", name: "Tailleur Professionnel Femme", category: "femme", price: 55000, priceLabel: "55 000 FCFA", image: boutiqueTailleurPro, rating: 5 },
+  { id: "7", name: "Collection 8 Mars — Femme Forte", category: "femme", price: 50000, priceLabel: "50 000 FCFA", image: boutique8Mars, badge: "Tendance", rating: 5 },
+  { id: "8", name: "Duo Saint-Valentin Couple", category: "femme", price: 95000, priceLabel: "95 000 FCFA", image: boutiqueSaintValentin, badge: "Promo", rating: 5 },
+  { id: "9", name: "Tissus Wax Premium (6 yards)", category: "tissus", price: 15000, priceLabel: "15 000 FCFA", image: boutiqueTissusWax, rating: 4 },
+  { id: "10", name: "Tenue de Groupe Assortie", category: "homme", price: 40000, priceLabel: "40 000 FCFA", image: boutiqueTenueGroupe, rating: 4 },
+  { id: "11", name: "Robe de Mariée Dentelle", category: "femme", price: 150000, priceLabel: "150 000 FCFA", image: boutiqueRobeMariee, badge: "Premium", rating: 5 },
+  { id: "12", name: "Agbada Royal Bleu & Or", category: "homme", price: 75000, priceLabel: "75 000 FCFA", image: boutiqueAgbadaRoyal, badge: "Exclusif", rating: 5 },
+  { id: "13", name: "Grand Boubou Femme Émeraude", category: "femme", price: 60000, priceLabel: "60 000 FCFA", image: boutiqueBoubouFemme, rating: 5 },
+  { id: "14", name: "Caftan Homme Blanc Brodé", category: "homme", price: 55000, priceLabel: "55 000 FCFA", image: boutiqueCaftanHomme, rating: 5 },
+  { id: "15", name: "Tenue de Baptême Bébé", category: "enfants", price: 20000, priceLabel: "20 000 FCFA", image: boutiqueTenueBapteme, badge: "Nouveau", rating: 5 },
+  { id: "16", name: "Combinaison Wax Moderne", category: "femme", price: 42000, priceLabel: "42 000 FCFA", image: boutiqueCombinaisonWax, rating: 4 },
+  { id: "17", name: "Jupe Crayon & Blouse Imprimée", category: "femme", price: 38000, priceLabel: "38 000 FCFA", image: boutiqueJupeCrayon, rating: 4 },
+  { id: "18", name: "Dashiki Moderne Homme", category: "homme", price: 30000, priceLabel: "30 000 FCFA", image: boutiqueDashikiModerne, rating: 4 },
+  { id: "19", name: "Tissu Kenté Authentique (3 yards)", category: "tissus", price: 25000, priceLabel: "25 000 FCFA", image: boutiqueTissuKente, rating: 5 },
+  { id: "20", name: "Robe de Gala Violet Royal", category: "femme", price: 70000, priceLabel: "70 000 FCFA", image: boutiqueRobeGala, badge: "Tendance", rating: 5 },
+  { id: "21", name: "Uniformes Scolaires (lot)", category: "enfants", price: 18000, priceLabel: "18 000 FCFA", image: boutiqueUniformeScolaire, rating: 4 },
+  { id: "22", name: "Pagne Noué Traditionnel", category: "femme", price: 35000, priceLabel: "35 000 FCFA", image: boutiquePagneNoue, rating: 5 },
+  { id: "23", name: "Bazin Riche Ivoire & Or (6 yards)", category: "tissus", price: 30000, priceLabel: "30 000 FCFA", image: boutiqueTissuBazin, rating: 5 },
+  { id: "24", name: "Blazer Africain Moderne", category: "homme", price: 48000, priceLabel: "48 000 FCFA", image: boutiqueBlazerAfricain, badge: "Nouveau", rating: 5 },
 ];
 
 const Boutique = () => {
@@ -109,7 +139,7 @@ const Boutique = () => {
             </div>
 
             <TabsContent value={activeTab}>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {filtered.map((product) => (
                   <Card key={product.id} className="group overflow-hidden hover:shadow-xl transition-all duration-300 border-0 shadow-md">
                     <div className="relative aspect-[4/5] overflow-hidden">
@@ -124,7 +154,7 @@ const Boutique = () => {
                           <Star key={i} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
                         ))}
                       </div>
-                      <h3 className="font-playfair font-semibold text-foreground mb-1">{product.name}</h3>
+                      <h3 className="font-playfair font-semibold text-foreground mb-1 text-sm">{product.name}</h3>
                       <div className="flex items-center justify-between">
                         <span className="text-lg font-bold text-elegant-600">{product.priceLabel}</span>
                         <Button size="sm" className="bg-elegant-600 hover:bg-elegant-700 text-white" onClick={() => handleAddToCart(product)}>
