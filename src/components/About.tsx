@@ -50,7 +50,7 @@ const About = () => {
             <div className="relative">
               <div className="relative overflow-hidden rounded-2xl shadow-2xl">
                 <img 
-                  src="/lovable-uploads/fac15059-22a8-44a1-8a93-e841d8edee86.png"
+                  src={clemencePhoto}
                   alt="Clémence KANGAH"
                   className="w-full h-96 object-cover"
                 />
