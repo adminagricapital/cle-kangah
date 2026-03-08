@@ -217,6 +217,36 @@ export type Database = {
         }
         Relationships: []
       }
+      generated_models: {
+        Row: {
+          created_at: string
+          description: string
+          gender: string
+          id: string
+          image_url: string
+          is_public: boolean
+          style: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          gender?: string
+          id?: string
+          image_url: string
+          is_public?: boolean
+          style?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          gender?: string
+          id?: string
+          image_url?: string
+          is_public?: boolean
+          style?: string
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           created_at: string
