@@ -14,6 +14,7 @@ import ValuFam from '@/components/ValuFam';
 import Contact from '@/components/Contact';
 import Newsletter from '@/components/Newsletter';
 import Footer from '@/components/Footer';
+import FAQ from '@/components/FAQ';
 
 const Index = () => {
   return (
@@ -28,6 +29,7 @@ const Index = () => {
       <Projects />
       <Testimonials />
       <Partners />
+      <FAQ />
       <ValuFam />
       <Contact />
       <Newsletter />
