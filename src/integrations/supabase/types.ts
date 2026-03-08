@@ -271,6 +271,42 @@ export type Database = {
         }
         Relationships: []
       }
+      reviews: {
+        Row: {
+          client_email: string
+          client_name: string
+          comment: string
+          created_at: string
+          id: string
+          is_approved: boolean | null
+          rating: number
+          service_type: string
+          title: string | null
+        }
+        Insert: {
+          client_email: string
+          client_name: string
+          comment: string
+          created_at?: string
+          id?: string
+          is_approved?: boolean | null
+          rating?: number
+          service_type?: string
+          title?: string | null
+        }
+        Update: {
+          client_email?: string
+          client_name?: string
+          comment?: string
+          created_at?: string
+          id?: string
+          is_approved?: boolean | null
+          rating?: number
+          service_type?: string
+          title?: string | null
+        }
+        Relationships: []
+      }
       services: {
         Row: {
           category: string
