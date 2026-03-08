@@ -69,6 +69,11 @@ const Services = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Nos Services – Couture, Formation, Coaching & Événementiel | CK Couture"
+        description="Services professionnels de Clémence KANGAH : couture sur mesure, formation en couture, coaching entrepreneurial, consulting mode, conférences et édition. Réservez en ligne."
+        path="/services"
+      />
       <Navbar />
       <main className="pt-20 pb-16">
         {/* Hero section */}

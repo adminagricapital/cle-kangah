@@ -56,6 +56,13 @@ const BlogArticle = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title={`${article.title} – Blog CK Couture | Clémence KANGAH`}
+        description={article.meta_description || article.summary || `Lisez "${article.title}" sur le blog de CK Couture.`}
+        path={`/blog/${article.slug}`}
+        image={article.featured_image || undefined}
+        type="article"
+      />
       <Navbar />
       <main className="pt-20 pb-16">
         <article className="container mx-auto px-4 max-w-3xl">
