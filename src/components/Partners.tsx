@@ -10,7 +10,7 @@ import partnerFapda from "@/assets/partner-fapda.png";
 const partners = [
   { name: "UNIWAX", logo: partnerUniwax, desc: "Fabricant de tissus wax premium" },
   { name: "Miss Côte d'Ivoire", logo: partnerMissCi, desc: "Concours de beauté national" },
-  { name: "AK Confection", logo: partnerAk, desc: "Maison de confection partenaire" },
+  { name: "AK Confection", logo: partnerAk, desc: "Tisserand & promoteur de pagne baoulé" },
   { name: "Woodin", logo: partnerWoodin, desc: "Marque de mode africaine" },
   { name: "Vlisco", logo: partnerVlisco, desc: "Tissus hollandais premium" },
   { name: "FAPDA", logo: partnerFapda, desc: "Fédération des professionnels de la mode" },
