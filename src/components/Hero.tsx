@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, Heart, Sparkles } from 'lucide-react';
+import clemencePhoto from '@/assets/clemence-kangah-photo.png';
 
 const Hero = () => {
   return (
