@@ -200,7 +200,28 @@ const Commander = () => {
               </CardContent>
             </Card>
 
-            {/* Tissus - Visual */}
+            {/* AI Model Generator */}
+            <ModelGenerator
+              onSelectModel={(imageUrl, desc) => {
+                update("selected_model_url", imageUrl);
+                update("selected_model_desc", desc);
+              }}
+            />
+
+            {form.selected_model_url && (
+              <Card className="border-green-300 bg-green-50">
+                <CardContent className="p-4 flex items-center gap-4">
+                  <img src={form.selected_model_url} alt="Modèle sélectionné" className="w-16 h-20 object-cover rounded-lg" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-foreground">Modèle sélectionné</p>
+                    <p className="text-xs text-muted-foreground line-clamp-2">{form.selected_model_desc}</p>
+                  </div>
+                  <Button type="button" variant="ghost" size="sm" onClick={() => { update("selected_model_url", ""); update("selected_model_desc", ""); }}>✕</Button>
+                </CardContent>
+              </Card>
+            )}
+
+
             <Card>
               <CardHeader><CardTitle className="font-playfair text-elegant-800">Choix du Tissu</CardTitle></CardHeader>
               <CardContent className="space-y-6">
