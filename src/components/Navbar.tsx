@@ -69,7 +69,7 @@ const mobileMenuVariants = {
     height: 'auto',
     transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number], staggerChildren: 0.05 },
   },
-  exit: { opacity: 0, height: 0, transition: { duration: 0.2, ease: 'easeIn' } },
+  exit: { opacity: 0, height: 0, transition: { duration: 0.2, ease: 'easeIn' as const } },
 };
 
 const mobileItemVariants = {
