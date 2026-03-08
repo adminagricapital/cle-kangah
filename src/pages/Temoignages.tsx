@@ -57,6 +57,11 @@ const Temoignages = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Avis Clients – Témoignages sur CK Couture | Clémence KANGAH"
+        description="Lisez les avis de nos clients satisfaits : robes de mariée, costumes sur mesure, tenues de cérémonie et événementiel. Note moyenne 5/5. Partagez votre expérience."
+        path="/temoignages"
+      />
       <Navbar />
       <main className="pt-20 pb-16">
         <div className="relative bg-elegant-800 py-16 mb-8">

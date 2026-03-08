@@ -131,6 +131,11 @@ const Commander = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Commander sur Mesure – Tenue Personnalisée en Ligne | CK Couture Daloa"
+        description="Commandez votre tenue africaine sur mesure en ligne : choisissez tissu, modèle, envoyez vos mensurations. Livraison sous 7 jours. Paiement Mobile Money accepté."
+        path="/commander"
+      />
       <Navbar />
       <main className="pt-20 pb-16">
         <div className="bg-gradient-elegant py-12 mb-8">

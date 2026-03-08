@@ -37,6 +37,12 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Blog & Actualités – Couture Africaine, Tendances Mode | CK Couture"
+        description="Suivez les actualités de CK Couture : tendances mode africaine, conseils couture, événements (8 Mars, Fashion Week), interviews et inspirations wax, bazin et kente."
+        path="/blog"
+        type="blog"
+      />
       <Navbar />
       <main className="pt-20 pb-16">
         <div className="container mx-auto px-4">

@@ -55,6 +55,11 @@ const services = [
 const Atelier = () => {
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Atelier CK Couture – Haute Couture Africaine à Daloa"
+        description="Découvrez l'atelier CK Couture de Clémence KANGAH à Daloa : 30+ artisans, couture sur mesure, robes de mariée, tenues de cérémonie, prêt-à-porter africain. Excellence et savoir-faire ivoirien."
+        path="/atelier"
+      />
       <Navbar />
       
       {/* Hero */}

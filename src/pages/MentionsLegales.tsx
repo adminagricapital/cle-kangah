@@ -7,6 +7,11 @@ import Footer from '@/components/Footer';
 const MentionsLegales = () => {
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Mentions Légales – CK Couture | Clémence KANGAH"
+        description="Mentions légales du site CK Couture de Clémence KANGAH, couturière professionnelle à Daloa, Côte d'Ivoire."
+        path="/mentions-legales"
+      />
       <Navbar />
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4 max-w-3xl">

@@ -41,6 +41,11 @@ const Boutique = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Boutique CK Couture – Tenues Africaines & Prêt-à-Porter | Daloa"
+        description="Achetez vos tenues africaines en ligne : robes wax, costumes homme, tenues enfants, accessoires artisanaux. Livraison sous 7 jours depuis Daloa, Côte d'Ivoire."
+        path="/boutique"
+      />
       <Navbar />
       <main className="pt-20 pb-16">
         <div className="relative bg-elegant-800 py-16 mb-8">
