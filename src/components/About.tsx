@@ -2,6 +2,7 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Heart, Users, BookOpen, Target } from 'lucide-react';
+import clemencePhoto from '@/assets/clemence-kangah-photo.png';
 
 const About = () => {
   return (
