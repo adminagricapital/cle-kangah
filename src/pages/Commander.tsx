@@ -93,7 +93,8 @@ const Commander = () => {
       fabric_type: form.fabric_type, ethnic_fabric: form.ethnic_fabric || null,
       quantity: parseInt(form.quantity) || 1, measurements,
       occasion: form.occasion || null, delivery_date: form.delivery_date || null,
-      notes: form.notes ? `${form.notes}\n\nPaiement: ${form.payment_method}` : `Paiement: ${form.payment_method}`,
+      notes: form.notes ? `${form.notes}\n\nPaiement: ${form.payment_method}${form.selected_model_url ? '\n\nModèle IA: ' + form.selected_model_url : ''}` : `Paiement: ${form.payment_method}${form.selected_model_url ? '\nModèle IA: ' + form.selected_model_url : ''}`,
+      reference_image: form.selected_model_url || null,
     });
 
     setSubmitting(false);
