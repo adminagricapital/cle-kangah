@@ -1,5 +1,6 @@
 
 import React from 'react';
+import SEOHead from '@/components/SEOHead';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
