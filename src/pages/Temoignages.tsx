@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ReviewForm from "@/components/ReviewForm";
