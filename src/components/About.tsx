@@ -21,7 +21,7 @@ const About = () => {
             {/* Text Content */}
             <div className="space-y-6">
               <p className="text-lg leading-relaxed text-gray-700">
-                Je n'ai pas eu la chance de suivre le chemin classique de l'école. Ma véritable école a été la vie, et très tôt, la couture est devenue mon premier langage d'expression.
+                Passionnée par l'art textile depuis mon plus jeune âge, j'ai fait de la couture bien plus qu'un métier : une vocation. Formée au cœur de la tradition ivoirienne et nourrie par les défis de la vie, j'ai développé un savoir-faire unique qui allie créativité, rigueur et authenticité.
               </p>
               
               <p className="text-lg leading-relaxed text-gray-700">
