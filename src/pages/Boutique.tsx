@@ -166,6 +166,7 @@ const Boutique = () => {
                 <TabsTrigger value="femme">Femme</TabsTrigger>
                 <TabsTrigger value="homme">Homme</TabsTrigger>
                 <TabsTrigger value="enfants">Enfants</TabsTrigger>
+                <TabsTrigger value="accessoires">Accessoires</TabsTrigger>
                 <TabsTrigger value="tissus">Tissus</TabsTrigger>
               </TabsList>
             </div>
