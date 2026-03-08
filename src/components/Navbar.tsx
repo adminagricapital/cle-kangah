@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, Scissors, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavGroup {
   label: string;
@@ -39,6 +40,42 @@ const navEntries: NavEntry[] = [
   },
   { href: '/#contact', label: 'Contact' },
 ];
+
+const dropdownVariants = {
+  hidden: { opacity: 0, y: -8, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number], staggerChildren: 0.04 },
+  },
+  exit: {
+    opacity: 0,
+    y: -6,
+    scale: 0.96,
+    transition: { duration: 0.15, ease: 'easeIn' as const },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -8 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.15 } },
+};
+
+const mobileMenuVariants = {
+  hidden: { opacity: 0, height: 0 },
+  visible: {
+    opacity: 1,
+    height: 'auto',
+    transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number], staggerChildren: 0.05 },
+  },
+  exit: { opacity: 0, height: 0, transition: { duration: 0.2, ease: 'easeIn' as const } },
+};
+
+const mobileItemVariants = {
+  hidden: { opacity: 0, x: -12 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.2 } },
+};
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -135,22 +172,33 @@ const Navbar = () => {
                     onClick={() => setOpenDropdown(openDropdown === entry.label ? null : entry.label)}
                   >
                     {entry.label}
-                    <ChevronDown
-                      className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                        openDropdown === entry.label ? 'rotate-180' : ''
-                      }`}
-                    />
+                    <motion.span
+                      animate={{ rotate: openDropdown === entry.label ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ChevronDown className="w-3.5 h-3.5" />
+                    </motion.span>
                   </button>
-                  {openDropdown === entry.label && (
-                    <div className="absolute top-full left-0 mt-1 w-52 bg-background border border-border rounded-xl shadow-xl py-2 animate-in fade-in-0 zoom-in-95 duration-150">
-                      {entry.items.map((sub) =>
-                        renderLink(
-                          sub,
-                          'block px-4 py-2.5 text-sm text-foreground/80 hover:text-elegant-600 hover:bg-muted transition-colors'
-                        )
-                      )}
-                    </div>
-                  )}
+                  <AnimatePresence>
+                    {openDropdown === entry.label && (
+                      <motion.div
+                        variants={dropdownVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className="absolute top-full left-0 mt-1 w-52 bg-background border border-border rounded-xl shadow-xl py-2 overflow-hidden"
+                      >
+                        {entry.items.map((sub) => (
+                          <motion.div key={sub.href} variants={itemVariants}>
+                            {renderLink(
+                              sub,
+                              'block px-4 py-2.5 text-sm text-foreground/80 hover:text-elegant-600 hover:bg-muted transition-colors'
+                            )}
+                          </motion.div>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               ) : (
                 renderLink(
@@ -162,53 +210,100 @@ const Navbar = () => {
           </div>
 
           <Button variant="ghost" size="sm" className="lg:hidden" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <AnimatePresence mode="wait">
+              {isOpen ? (
+                <motion.span
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X className="w-6 h-6" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu className="w-6 h-6" />
+                </motion.span>
+              )}
+            </AnimatePresence>
           </Button>
         </div>
 
         {/* Mobile nav */}
-        {isOpen && (
-          <div className="lg:hidden bg-background/95 backdrop-blur-md border-t border-border">
-            <div className="py-3 space-y-1">
-              {navEntries.map((entry) =>
-                isGroup(entry) ? (
-                  <div key={entry.label}>
-                    <button
-                      className="flex items-center justify-between w-full px-4 py-2.5 text-foreground/80 hover:text-elegant-600 font-medium text-sm"
-                      onClick={() =>
-                        setOpenMobileGroup(openMobileGroup === entry.label ? null : entry.label)
-                      }
-                    >
-                      {entry.label}
-                      <ChevronDown
-                        className={`w-4 h-4 transition-transform duration-200 ${
-                          openMobileGroup === entry.label ? 'rotate-180' : ''
-                        }`}
-                      />
-                    </button>
-                    {openMobileGroup === entry.label && (
-                      <div className="pl-6 space-y-1 pb-1">
-                        {entry.items.map((sub) =>
-                          renderLink(
-                            sub,
-                            'block px-4 py-2 text-sm text-foreground/70 hover:text-elegant-600 hover:bg-muted/50 rounded-md transition-colors',
-                            () => setIsOpen(false)
-                          )
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              variants={mobileMenuVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="lg:hidden bg-background/95 backdrop-blur-md border-t border-border overflow-hidden"
+            >
+              <div className="py-3 space-y-1">
+                {navEntries.map((entry) =>
+                  isGroup(entry) ? (
+                    <motion.div key={entry.label} variants={mobileItemVariants}>
+                      <button
+                        className="flex items-center justify-between w-full px-4 py-2.5 text-foreground/80 hover:text-elegant-600 font-medium text-sm"
+                        onClick={() =>
+                          setOpenMobileGroup(openMobileGroup === entry.label ? null : entry.label)
+                        }
+                      >
+                        {entry.label}
+                        <motion.span
+                          animate={{ rotate: openMobileGroup === entry.label ? 180 : 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <ChevronDown className="w-4 h-4" />
+                        </motion.span>
+                      </button>
+                      <AnimatePresence>
+                        {openMobileGroup === entry.label && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto', transition: { duration: 0.2, staggerChildren: 0.05 } }}
+                            exit={{ opacity: 0, height: 0, transition: { duration: 0.15 } }}
+                            className="pl-6 space-y-1 pb-1 overflow-hidden"
+                          >
+                            {entry.items.map((sub) => (
+                              <motion.div
+                                key={sub.href}
+                                initial={{ opacity: 0, x: -8 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.15 }}
+                              >
+                                {renderLink(
+                                  sub,
+                                  'block px-4 py-2 text-sm text-foreground/70 hover:text-elegant-600 hover:bg-muted/50 rounded-md transition-colors',
+                                  () => setIsOpen(false)
+                                )}
+                              </motion.div>
+                            ))}
+                          </motion.div>
                         )}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  renderLink(
-                    entry,
-                    'block px-4 py-2.5 text-foreground/80 hover:text-elegant-600 hover:bg-muted/50 transition-colors text-sm font-medium',
-                    () => setIsOpen(false)
+                      </AnimatePresence>
+                    </motion.div>
+                  ) : (
+                    <motion.div key={(entry as NavItem).href} variants={mobileItemVariants}>
+                      {renderLink(
+                        entry as NavItem,
+                        'block px-4 py-2.5 text-foreground/80 hover:text-elegant-600 hover:bg-muted/50 transition-colors text-sm font-medium',
+                        () => setIsOpen(false)
+                      )}
+                    </motion.div>
                   )
-                )
-              )}
-            </div>
-          </div>
-        )}
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );
