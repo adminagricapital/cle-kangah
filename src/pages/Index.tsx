@@ -20,6 +20,11 @@ import FAQ from '@/components/FAQ';
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Clémence KANGAH – Couturière sur Mesure, Auteure & Formatrice à Daloa"
+        description="Clémence KANGAH, couturière professionnelle à Daloa (Côte d'Ivoire). Couture sur mesure, robes de mariée, tenues africaines, formations et accompagnement. Commandez en ligne."
+        path="/"
+      />
       <Navbar />
       <Hero />
       <About />
