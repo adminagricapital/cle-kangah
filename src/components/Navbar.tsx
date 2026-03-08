@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, Scissors, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import ckLogo from '@/assets/ck-couture-logo.png';
 
 interface NavGroup {
   label: string;
@@ -152,9 +153,8 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center space-x-2">
-            <Scissors className="w-6 h-6 text-elegant-600" />
-            <span className="font-playfair font-bold text-xl text-elegant-800">Clémence KANGAH</span>
+          <Link to="/" className="flex items-center">
+            <img src={ckLogo} alt="CK Couture" className="h-10 w-auto" />
           </Link>
 
           {/* Desktop nav */}

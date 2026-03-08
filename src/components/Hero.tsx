@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, Heart, Sparkles } from 'lucide-react';
+import clemencePhoto from '@/assets/clemence-kangah-photo.png';
 
 const Hero = () => {
   return (
@@ -18,7 +19,7 @@ const Hero = () => {
           <div className="mb-8 animate-fade-up">
             <div className="w-36 h-36 md:w-44 md:h-44 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-2xl">
               <img 
-                src="/lovable-uploads/fac15059-22a8-44a1-8a93-e841d8edee86.png"
+                src={clemencePhoto}
                 alt="Clémence KANGAH"
                 className="w-full h-full object-cover"
               />
