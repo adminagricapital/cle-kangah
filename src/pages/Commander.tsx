@@ -14,10 +14,6 @@ import {
   ethnicFabrics, occasionOptions, paymentMethods
 } from "@/data/commander-options";
 import ModelGenerator from "@/components/ModelGenerator";
-import {
-  genderOptions, garmentImages, garmentCategories, fabricOptions,
-  ethnicFabrics, occasionOptions, paymentMethods
-} from "@/data/commander-options";
 
 // Visual selector component
 const VisualSelector = ({ label, options, value, onChange, required }: {
