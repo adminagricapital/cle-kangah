@@ -47,7 +47,7 @@ const dropdownVariants = {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94], staggerChildren: 0.04 },
+    transition: { duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number], staggerChildren: 0.04 },
   },
   exit: {
     opacity: 0,
