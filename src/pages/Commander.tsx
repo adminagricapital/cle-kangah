@@ -13,6 +13,7 @@ import {
   genderOptions, garmentImages, garmentCategories, fabricOptions,
   ethnicFabrics, occasionOptions, paymentMethods
 } from "@/data/commander-options";
+import ModelGenerator from "@/components/ModelGenerator";
 
 // Visual selector component
 const VisualSelector = ({ label, options, value, onChange, required }: {
@@ -66,6 +67,7 @@ const Commander = () => {
     occasion: "", delivery_date: "", notes: "", payment_method: "",
     tour_poitrine: "", tour_taille: "", tour_hanches: "",
     longueur: "", tour_bras: "", epaules: "",
+    selected_model_url: "", selected_model_desc: "",
   });
 
   const update = (key: string, val: string) => setForm(f => ({ ...f, [key]: val }));
@@ -87,7 +89,8 @@ const Commander = () => {
       fabric_type: form.fabric_type, ethnic_fabric: form.ethnic_fabric || null,
       quantity: parseInt(form.quantity) || 1, measurements,
       occasion: form.occasion || null, delivery_date: form.delivery_date || null,
-      notes: form.notes ? `${form.notes}\n\nPaiement: ${form.payment_method}` : `Paiement: ${form.payment_method}`,
+      notes: form.notes ? `${form.notes}\n\nPaiement: ${form.payment_method}${form.selected_model_url ? '\n\nModèle IA: ' + form.selected_model_url : ''}` : `Paiement: ${form.payment_method}${form.selected_model_url ? '\nModèle IA: ' + form.selected_model_url : ''}`,
+      reference_image: form.selected_model_url || null,
     });
 
     setSubmitting(false);
@@ -197,7 +200,28 @@ const Commander = () => {
               </CardContent>
             </Card>
 
-            {/* Tissus - Visual */}
+            {/* AI Model Generator */}
+            <ModelGenerator
+              onSelectModel={(imageUrl, desc) => {
+                update("selected_model_url", imageUrl);
+                update("selected_model_desc", desc);
+              }}
+            />
+
+            {form.selected_model_url && (
+              <Card className="border-green-300 bg-green-50">
+                <CardContent className="p-4 flex items-center gap-4">
+                  <img src={form.selected_model_url} alt="Modèle sélectionné" className="w-16 h-20 object-cover rounded-lg" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-foreground">Modèle sélectionné</p>
+                    <p className="text-xs text-muted-foreground line-clamp-2">{form.selected_model_desc}</p>
+                  </div>
+                  <Button type="button" variant="ghost" size="sm" onClick={() => { update("selected_model_url", ""); update("selected_model_desc", ""); }}>✕</Button>
+                </CardContent>
+              </Card>
+            )}
+
+
             <Card>
               <CardHeader><CardTitle className="font-playfair text-elegant-800">Choix du Tissu</CardTitle></CardHeader>
               <CardContent className="space-y-6">
