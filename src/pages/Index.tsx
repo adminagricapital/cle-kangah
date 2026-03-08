@@ -9,6 +9,7 @@ import Skills from '@/components/Skills';
 import BoutiquePreview from '@/components/BoutiquePreview';
 import Projects from '@/components/Projects';
 import Testimonials from '@/components/Testimonials';
+import Partners from '@/components/Partners';
 import ValuFam from '@/components/ValuFam';
 import Contact from '@/components/Contact';
 import Newsletter from '@/components/Newsletter';
@@ -26,6 +27,7 @@ const Index = () => {
       <Skills />
       <Projects />
       <Testimonials />
+      <Partners />
       <ValuFam />
       <Contact />
       <Newsletter />

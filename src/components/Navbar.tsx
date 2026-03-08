@@ -23,7 +23,7 @@ const Navbar = () => {
     { href: '/atelier', label: 'CK Couture' },
     { href: '/boutique', label: 'Boutique' },
     { href: '/services', label: 'Services' },
-    { href: '/#ouvrages', label: 'Mes Ouvrages' },
+    { href: '/temoignages', label: 'Avis' },
     { href: '/commander', label: 'Commander' },
     { href: '/blog', label: 'Blog' },
     { href: '/#contact', label: 'Contact' },
