@@ -71,6 +71,7 @@ const Commander = () => {
     occasion: "", delivery_date: "", notes: "", payment_method: "",
     tour_poitrine: "", tour_taille: "", tour_hanches: "",
     longueur: "", tour_bras: "", epaules: "",
+    selected_model_url: "", selected_model_desc: "",
   });
 
   const update = (key: string, val: string) => setForm(f => ({ ...f, [key]: val }));
