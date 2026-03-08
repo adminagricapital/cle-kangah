@@ -37,7 +37,7 @@ const Partners = () => (
               key={p.name}
               className="group flex flex-col items-center text-center p-4 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300"
             >
-              <div className="w-24 h-24 mb-3 flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-300">
+              <div className="w-24 h-24 mb-3 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
                 <img src={p.logo} alt={p.name} className="max-w-full max-h-full object-contain" />
               </div>
               <h3 className="font-semibold text-sm text-foreground">{p.name}</h3>
