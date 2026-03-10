@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SEOHead from "@/components/SEOHead";
+import StructuredData from "@/components/StructuredData";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
@@ -64,6 +65,18 @@ const BlogArticle = () => {
         type="article"
       />
       <Navbar />
+      <StructuredData data={{
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": article.title,
+        "description": article.meta_description || article.summary || "",
+        "image": article.featured_image || "",
+        "datePublished": article.published_at,
+        "dateModified": article.updated_at || article.published_at,
+        "author": { "@type": "Person", "name": "Clémence KANGAH" },
+        "publisher": { "@type": "Organization", "name": "CK Couture" },
+        "mainEntityOfPage": `https://cle-kangah.lovable.app/blog/${article.slug}`
+      }} />
       <main className="pt-20 pb-16">
         <article className="container mx-auto px-4 max-w-3xl">
           <Link to="/blog" className="text-elegant-600 hover:underline flex items-center gap-1 mb-6">

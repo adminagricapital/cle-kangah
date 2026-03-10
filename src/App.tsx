@@ -11,6 +11,7 @@ import Services from "./pages/Services";
 import Atelier from "./pages/Atelier";
 import Commander from "./pages/Commander";
 import Boutique from "./pages/Boutique";
+import Catalogue from "./pages/Catalogue";
 import Temoignages from "./pages/Temoignages";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
@@ -46,6 +47,7 @@ const App = () => (
           <Route path="/atelier" element={<Atelier />} />
           <Route path="/commander" element={<Commander />} />
           <Route path="/boutique" element={<Boutique />} />
+          <Route path="/catalogue" element={<Catalogue />} />
           <Route path="/temoignages" element={<Temoignages />} />
           <Route path="/mentions-legales" element={<MentionsLegales />} />
           <Route path="/admin" element={<AdminLayout />}>

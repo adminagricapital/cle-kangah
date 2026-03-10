@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Heart, Users, BookOpen, Target } from 'lucide-react';
 import clemencePhoto from '@/assets/clemence-kangah-photo.png';
+import AnimatedPhoto from '@/components/AnimatedPhoto';
 
 const About = () => {
   return (
@@ -46,16 +47,16 @@ const About = () => {
               </p>
             </div>
 
-            {/* Profile Image */}
+            {/* Profile Image with animation */}
             <div className="relative">
-              <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-                <img 
-                  src={clemencePhoto}
-                  alt="Clémence KANGAH"
-                  className="w-full h-96 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-elegant-900/20 to-transparent"></div>
-              </div>
+              <AnimatedPhoto
+                src={clemencePhoto}
+                alt="Clémence KANGAH"
+                variant="about"
+                containerClassName="relative"
+                className="w-full h-96 object-cover rounded-2xl shadow-2xl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-elegant-900/20 to-transparent rounded-2xl pointer-events-none"></div>
               
               {/* Floating elements */}
               <div className="absolute -top-4 -right-4 w-8 h-8 bg-rose-400 rounded-full animate-float"></div>

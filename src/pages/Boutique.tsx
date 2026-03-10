@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import SEOHead from "@/components/SEOHead";
+import StructuredData from "@/components/StructuredData";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -47,6 +48,24 @@ const Boutique = () => {
         path="/boutique"
       />
       <Navbar />
+      <StructuredData data={{
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Boutique CK Couture",
+        "description": "Tenues africaines, prêt-à-porter et accessoires artisanaux",
+        "numberOfItems": products.length,
+        "itemListElement": products.slice(0, 10).map((p, i) => ({
+          "@type": "ListItem",
+          "position": i + 1,
+          "item": {
+            "@type": "Product",
+            "name": p.name,
+            "image": `https://cle-kangah.lovable.app${p.image}`,
+            "offers": { "@type": "Offer", "price": p.price, "priceCurrency": "XOF", "availability": "https://schema.org/InStock" },
+            "aggregateRating": { "@type": "AggregateRating", "ratingValue": p.rating, "bestRating": 5 }
+          }
+        }))
+      }} />
       <main className="pt-20 pb-16">
         <div className="relative bg-elegant-800 py-16 mb-8">
           <div className="container mx-auto px-4 text-center text-white">

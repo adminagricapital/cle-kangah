@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SEOHead from "@/components/SEOHead";
+import StructuredData from "@/components/StructuredData";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -75,6 +76,24 @@ const Services = () => {
         path="/services"
       />
       <Navbar />
+      {services.length > 0 && (
+        <StructuredData data={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "name": "Services CK Couture",
+          "itemListElement": services.map((s, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "item": {
+              "@type": "Service",
+              "name": s.title,
+              "description": s.description,
+              "provider": { "@type": "Person", "name": "Clémence KANGAH" },
+              ...(s.price ? { "offers": { "@type": "Offer", "price": s.price, "priceCurrency": "XOF" } } : {})
+            }
+          }))
+        }} />
+      )}
       <main className="pt-20 pb-16">
         {/* Hero section */}
         <div className="bg-gradient-elegant py-16 mb-12">
