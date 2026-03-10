@@ -66,6 +66,7 @@ const Boutique = () => {
           }
         }))
       }} />
+      <main className="pt-20 pb-16">
         <div className="relative bg-elegant-800 py-16 mb-8">
           <div className="container mx-auto px-4 text-center text-white">
             <ShoppingBag className="w-10 h-10 mx-auto mb-3 text-elegant-300" />
