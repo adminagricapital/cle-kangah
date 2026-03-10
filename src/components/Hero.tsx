@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, Heart, Sparkles } from 'lucide-react';
 import clemencePhoto from '@/assets/clemence-kangah-photo.png';
+import AnimatedPhoto from '@/components/AnimatedPhoto';
 
 const Hero = () => {
   return (
@@ -15,15 +16,15 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
-          {/* Photo */}
-          <div className="mb-8 animate-fade-up">
-            <div className="w-36 h-36 md:w-44 md:h-44 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-2xl">
-              <img 
-                src={clemencePhoto}
-                alt="Clémence KANGAH"
-                className="w-full h-full object-cover"
-              />
-            </div>
+          {/* Photo with animation */}
+          <div className="mb-8">
+            <AnimatedPhoto
+              src={clemencePhoto}
+              alt="Clémence KANGAH"
+              variant="hero"
+              containerClassName="w-36 h-36 md:w-44 md:h-44 mx-auto mb-6"
+              className="w-full h-full object-cover rounded-full border-4 border-white shadow-2xl"
+            />
           </div>
 
           {/* Main Title */}

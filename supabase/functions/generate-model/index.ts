@@ -29,30 +29,43 @@ serve(async (req) => {
       );
     }
 
-    // Build prompt based on style and gender
     const styleMap: Record<string, string> = {
-      africain: "African wax print fabric, vibrant Ankara patterns, traditional African fashion",
-      europeen: "European haute couture, clean lines, modern minimalist fashion",
-      ivoirien: "Ivorian traditional style, Baoulé kita fabric, Côte d'Ivoire fashion",
-      oriental: "Oriental inspired fashion, rich embroidery, luxurious silks and brocade",
-      moderne: "Contemporary modern fashion, trendy urban style, innovative cuts",
-      traditionnel: "Traditional African ceremonial attire, cultural heritage, handwoven fabrics",
+      africain: "Authentic African wax print (Ankara/Vlisco), bold geometric patterns, vibrant contrasting colors, impeccable tailoring with structured silhouette, contemporary African haute couture",
+      europeen: "European luxury haute couture, clean architectural lines, premium fabric draping, minimalist elegance, Parisian runway quality",
+      ivoirien: "Authentic Ivorian fashion — traditional Baoulé kita cloth, handwoven Sénoufo or Gouro fabric, rich cultural heritage with modern sophistication, Côte d'Ivoire artisanal craftsmanship",
+      oriental: "Luxurious Oriental-inspired fashion, intricate gold thread embroidery, rich brocade and silk fabrics, regal and opulent aesthetic, jewel-toned color palette",
+      moderne: "Contemporary urban fashion-forward design, innovative asymmetric cuts, bold color blocking, street-style meets runway sophistication, trendsetting 2025 aesthetics",
+      traditionnel: "Traditional West African ceremonial attire, hand-embroidered details, premium handwoven fabric, cultural authenticity with refined elegance, heritage-inspired luxury",
     };
 
     const genderMap: Record<string, string> = {
-      femme: "beautiful African woman wearing",
-      homme: "handsome African man wearing",
-      enfant: "cute African child wearing",
+      femme: "a stunning elegant African woman model with flawless skin, natural hair or elegant headwrap, confident pose, wearing",
+      homme: "a distinguished handsome African man model with sharp features, confident stance, wearing",
+      enfant: "an adorable well-dressed African child with bright smile, natural charm, wearing",
     };
 
     const styleDesc = styleMap[style] || styleMap.africain;
     const genderDesc = genderMap[gender] || genderMap.femme;
 
-    const prompt = `Ultra-realistic professional fashion photography of ${genderDesc} ${description}. ${styleDesc}. Studio lighting, high-end editorial fashion shoot, full body shot on clean background, 8k quality, photorealistic.`;
+    const prompt = `Create an ultra-realistic, high-fashion editorial photograph of ${genderDesc} ${description}. 
+
+Style direction: ${styleDesc}.
+
+CRITICAL QUALITY REQUIREMENTS:
+- Professional studio photography with dramatic Rembrandt lighting and soft fill light
+- Shot on medium format camera (Hasselblad quality), shallow depth of field
+- Full body shot from head to toe, model centered in frame
+- Clean studio backdrop (gradient cream to white)
+- Fabric textures must be photorealistic with visible weave details
+- Perfect anatomical proportions, natural hand positioning
+- Garment must show impeccable construction: clean seams, proper draping, structured shoulders
+- Colors must be vivid, rich and true-to-life
+- The overall aesthetic should be worthy of Vogue Africa or Essence Magazine cover
+- Modern, trendy, responsible fashion — 2025 runway ready
+- NO distorted hands, NO extra fingers, NO unnatural poses`;
 
     console.log("Generating model with prompt:", prompt);
 
-    // Call Lovable AI with image generation model
     const aiResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -60,7 +73,7 @@ serve(async (req) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-2.5-flash-image",
+        model: "google/gemini-3-pro-image-preview",
         messages: [{ role: "user", content: prompt }],
         modalities: ["image", "text"],
       }),
