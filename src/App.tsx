@@ -11,6 +11,7 @@ import Services from "./pages/Services";
 import Atelier from "./pages/Atelier";
 import Commander from "./pages/Commander";
 import Boutique from "./pages/Boutique";
+import Catalogue from "./pages/Catalogue";
 import Temoignages from "./pages/Temoignages";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
