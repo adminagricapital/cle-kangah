@@ -48,7 +48,24 @@ const Boutique = () => {
         path="/boutique"
       />
       <Navbar />
-      <main className="pt-20 pb-16">
+      <StructuredData data={{
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Boutique CK Couture",
+        "description": "Tenues africaines, prêt-à-porter et accessoires artisanaux",
+        "numberOfItems": products.length,
+        "itemListElement": products.slice(0, 10).map((p, i) => ({
+          "@type": "ListItem",
+          "position": i + 1,
+          "item": {
+            "@type": "Product",
+            "name": p.name,
+            "image": `https://cle-kangah.lovable.app${p.image}`,
+            "offers": { "@type": "Offer", "price": p.price, "priceCurrency": "XOF", "availability": "https://schema.org/InStock" },
+            "aggregateRating": { "@type": "AggregateRating", "ratingValue": p.rating, "bestRating": 5 }
+          }
+        }))
+      }} />
         <div className="relative bg-elegant-800 py-16 mb-8">
           <div className="container mx-auto px-4 text-center text-white">
             <ShoppingBag className="w-10 h-10 mx-auto mb-3 text-elegant-300" />
