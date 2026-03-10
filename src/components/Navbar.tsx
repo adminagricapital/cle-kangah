@@ -28,6 +28,7 @@ const navEntries: NavEntry[] = [
     items: [
       { href: '/atelier', label: 'Atelier CK Couture' },
       { href: '/boutique', label: 'Boutique en ligne' },
+      { href: '/catalogue', label: 'Catalogue Modèles' },
       { href: '/commander', label: 'Commander sur mesure' },
     ],
   },
