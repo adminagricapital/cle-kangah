@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, Heart, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
 import clemencePhoto from '@/assets/clemence-kangah-photo.png';
 import AnimatedPhoto from '@/components/AnimatedPhoto';
 
@@ -17,40 +18,60 @@ const Hero = () => {
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
           {/* Photo with animation */}
-          <div className="mb-8">
+          <div className="mb-6 md:mb-8">
             <AnimatedPhoto
               src={clemencePhoto}
-              alt="Clémence KANGAH"
+              alt="Clémence KANGAH – Couturière & Auteure"
               variant="hero"
-              containerClassName="w-36 h-36 md:w-44 md:h-44 mx-auto mb-6"
+              containerClassName="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 mx-auto mb-4 md:mb-6"
               className="w-full h-full object-cover rounded-full border-4 border-white shadow-2xl"
             />
           </div>
 
           {/* Main Title */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold text-elegant-800 mb-4 md:mb-6 animate-fade-up leading-tight">
+          <motion.h1
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-playfair font-bold text-elegant-800 mb-3 md:mb-6 leading-tight"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+          >
             J&apos;couds des vis,
             <br />
             <span className="text-rose-600">J&apos;répare des âmes</span>
-          </h1>
+          </motion.h1>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl lg:text-2xl text-elegant-700 mb-8 animate-fade-up px-4" style={{ animationDelay: '0.2s' }}>
+          <motion.p
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-elegant-700 mb-6 md:mb-8 px-2 sm:px-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
             Nouvelle Trace Féminine – À la couture de l&apos;être et à l&apos;ouvrage du monde
-          </p>
+          </motion.p>
 
           {/* Citation */}
-          <div className="max-w-3xl mx-auto mb-10 animate-fade-up px-4" style={{ animationDelay: '0.3s' }}>
-            <blockquote className="text-lg md:text-xl font-playfair italic text-rose-700 border-l-4 border-rose-300 pl-6 py-4 bg-white/30 backdrop-blur-sm rounded-lg">
+          <motion.div
+            className="max-w-3xl mx-auto mb-8 md:mb-10 px-2 sm:px-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <blockquote className="text-base sm:text-lg md:text-xl font-playfair italic text-rose-700 border-l-4 border-rose-300 pl-4 sm:pl-6 py-3 md:py-4 bg-white/30 backdrop-blur-sm rounded-lg">
               &quot;Chaque point de couture est une prière, chaque création est un acte de foi vers un monde meilleur.&quot;
             </blockquote>
-          </div>
+          </motion.div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center animate-fade-up px-4" style={{ animationDelay: '0.4s' }}>
+          <motion.div
+            className="flex flex-col sm:flex-row gap-3 justify-center items-center px-2 sm:px-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
             <Button 
               size="lg" 
-              className="bg-elegant-600 hover:bg-elegant-700 text-white px-6 md:px-8 py-3 text-base md:text-lg w-full sm:w-auto"
+              className="bg-elegant-600 hover:bg-elegant-700 text-white px-6 md:px-8 py-3 text-sm sm:text-base md:text-lg w-full sm:w-auto"
               onClick={() => document.getElementById('apropos')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <Heart className="w-4 h-4 md:w-5 md:h-5 mr-2" />
@@ -59,7 +80,7 @@ const Hero = () => {
             <Button 
               variant="outline" 
               size="lg" 
-              className="border-elegant-600 text-elegant-600 hover:bg-elegant-50 px-6 md:px-8 py-3 text-base md:text-lg w-full sm:w-auto"
+              className="border-elegant-600 text-elegant-600 hover:bg-elegant-50 px-6 md:px-8 py-3 text-sm sm:text-base md:text-lg w-full sm:w-auto"
               onClick={() => document.getElementById('ouvrages')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <Sparkles className="w-4 h-4 md:w-5 md:h-5 mr-2" />
@@ -68,12 +89,12 @@ const Hero = () => {
             <Button 
               variant="outline" 
               size="lg" 
-              className="border-rose-600 text-rose-600 hover:bg-rose-50 px-6 md:px-8 py-3 text-base md:text-lg w-full sm:w-auto"
+              className="border-rose-600 text-rose-600 hover:bg-rose-50 px-6 md:px-8 py-3 text-sm sm:text-base md:text-lg w-full sm:w-auto"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Me contacter
             </Button>
-          </div>
+          </motion.div>
         </div>
 
         {/* Scroll indicator */}
